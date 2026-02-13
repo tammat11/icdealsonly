@@ -38,18 +38,34 @@ const ServicesSection = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // Main Services: Snappier reveal
             gsap.to(".service-reveal", {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 1.2,
-                stagger: 0.15,
-                ease: "power4.out",
+                duration: 0.6,
+                stagger: 0.05,
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 80%",
+                    start: "top 85%",
                 }
             });
+
+            // "Train" entrance for Other Services Marquee
+            gsap.fromTo(".marquee-train-entrance",
+                { x: "100%", opacity: 0 },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1.5,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".marquee-train-entrance",
+                        start: "top 90%",
+                    }
+                }
+            );
         }, sectionRef);
 
         return () => ctx.revert();
@@ -113,7 +129,7 @@ const ServicesSection = () => {
                 </div>
             </div>
 
-            <div className="relative border-t border-black/5 pt-10 opacity-0 service-reveal" style={{ transitionDelay: '500ms' }}>
+            <div className="relative border-t border-black/5 pt-10 marquee-train-entrance opacity-0">
                 <div className="mb-6 px-6 max-w-7xl mx-auto flex justify-between items-end">
                     <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
                     <div className="hidden md:flex gap-2">
