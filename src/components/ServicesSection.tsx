@@ -78,9 +78,11 @@ const ServicesSection = () => {
                     if (isDragging.current || !marquee) return;
 
                     const totalWidth = marquee.scrollWidth / 3;
+                    if (totalWidth <= 0) return;
+
                     if (xPos.current === 0) xPos.current = -totalWidth;
 
-                    xPos.current -= 0.8; // Speed
+                    xPos.current -= 1.0; // Slightly faster
                     if (xPos.current <= -totalWidth * 2) {
                         xPos.current += totalWidth;
                     }
@@ -153,10 +155,9 @@ const ServicesSection = () => {
                 </div>
 
                 <div
-                    className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
+                    className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
                     onMouseDown={(e) => {
                         if (!marqueeRef.current) return;
-
                         isDragging.current = true;
                         let startX = e.pageX;
                         let initialX = xPos.current;
@@ -164,11 +165,9 @@ const ServicesSection = () => {
                         const onMouseMove = (moveE: MouseEvent) => {
                             const deltaX = moveE.pageX - startX;
                             xPos.current = initialX + deltaX;
-
                             const totalWidth = marqueeRef.current!.scrollWidth / 3;
                             if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
                             if (xPos.current >= 0) xPos.current -= totalWidth;
-
                             gsap.set(marqueeRef.current, { x: xPos.current });
                         };
 
@@ -180,6 +179,30 @@ const ServicesSection = () => {
 
                         window.addEventListener('mousemove', onMouseMove);
                         window.addEventListener('mouseup', onMouseUp);
+                    }}
+                    onTouchStart={(e) => {
+                        if (!marqueeRef.current) return;
+                        isDragging.current = true;
+                        let startX = e.touches[0].pageX;
+                        let initialX = xPos.current;
+
+                        const onTouchMove = (moveE: TouchEvent) => {
+                            const deltaX = moveE.touches[0].pageX - startX;
+                            xPos.current = initialX + deltaX;
+                            const totalWidth = marqueeRef.current!.scrollWidth / 3;
+                            if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
+                            if (xPos.current >= 0) xPos.current -= totalWidth;
+                            gsap.set(marqueeRef.current, { x: xPos.current });
+                        };
+
+                        const onTouchEnd = () => {
+                            window.removeEventListener('touchmove', onTouchMove);
+                            window.removeEventListener('touchend', onTouchEnd);
+                            isDragging.current = false;
+                        };
+
+                        window.addEventListener('touchmove', onTouchMove);
+                        window.addEventListener('touchend', onTouchEnd);
                     }}
                 >
                     <div ref={marqueeRef} className="flex gap-4 py-4">

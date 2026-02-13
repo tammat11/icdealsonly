@@ -131,6 +131,15 @@ const ApplicationForm = () => {
 
     return (
         <section ref={sectionRef} id="contact-form" className="py-24 bg-white">
+            <div className="max-w-7xl mx-auto px-6 mb-12 text-center flex flex-col items-center form-reveal">
+                <h2 className="mb-2">
+                    ОСТАВИТЬ ЗАЯВКУ
+                </h2>
+                <p className="text-[10px] md:text-xs font-bold text-brand-green uppercase tracking-[0.3em]">
+                    Оперативно ответим на все ваши вопросы
+                </p>
+            </div>
+
             <div className="max-w-4xl mx-auto px-6">
                 <div className="bg-gradient-to-br from-[#1a1c23] to-[#0f1115] text-white p-8 md:p-16 rounded-[40px] relative overflow-hidden shadow-2xl form-reveal border border-white/5">
                     {/* Decorative Elements */}

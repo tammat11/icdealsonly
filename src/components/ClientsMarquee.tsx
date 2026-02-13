@@ -49,15 +49,15 @@ const ClientsMarquee = () => {
             </div>
 
             <div className="relative">
-                <div ref={marqueeRef} className="flex whitespace-nowrap gap-24 items-center w-max">
+                <div ref={marqueeRef} className="flex whitespace-nowrap gap-8 md:gap-24 items-center w-max">
                     {[1, 2, 3].map((set) => (
-                        <div key={set} className="flex items-center gap-24">
+                        <div key={set} className="flex items-center gap-8 md:gap-24">
                             {clients.map((client, i) => (
                                 <div
                                     key={`${set}-${i}`}
                                     className="flex flex-col items-center gap-4 group cursor-default"
                                 >
-                                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white border border-black/5 flex items-center justify-center p-6 transition-all duration-500 group-hover:border-brand-green/30 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] group-hover:-translate-y-2 relative overflow-hidden">
+                                    <div className="w-20 h-20 md:w-32 md:h-32 rounded-full bg-white border border-black/5 flex items-center justify-center p-6 transition-all duration-500 group-hover:border-brand-green/30 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] group-hover:-translate-y-2 relative overflow-hidden">
                                         <img
                                             src={client.logo || `https://logo.clearbit.com/${client.domain}`}
                                             alt={client.name}
