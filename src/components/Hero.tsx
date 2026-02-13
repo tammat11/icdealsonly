@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ShieldCheck, Award, Clock, Users } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,17 +33,18 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 }
             );
 
-            // Floating Badges Animation
-            gsap.to(".floating-badge", {
-                y: "random(-15, 15)",
-                x: "random(-10, 10)",
-                rotate: "random(-2, 2)",
-                duration: "random(2, 4)",
+            // Bubbles Animation
+            gsap.to(".hero-bubble", {
+                y: "random(-100, 100)",
+                x: "random(-50, 50)",
+                scale: "random(0.7, 1.3)",
+                opacity: "random(0.1, 0.4)",
+                duration: "random(5, 10)",
                 repeat: -1,
                 yoyo: true,
                 ease: "sine.inOut",
                 stagger: {
-                    each: 0.5,
+                    each: 0.2,
                     from: "random"
                 }
             });
@@ -106,54 +106,26 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
                 {/* Noise Texture */}
                 <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
-            </div>
 
-            {/* --- Floating Decorative Badges --- */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none select-none hidden lg:block">
-                {/* Badge 1 - Top Left */}
-                <div className="floating-badge absolute top-[25%] left-[12%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
-                    <div className="w-8 h-8 rounded-lg bg-brand-green/10 flex items-center justify-center text-brand-green">
-                        <Award size={18} />
-                    </div>
-                    <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Опыт на рынке</p>
-                        <p className="text-sm font-bold text-brand-dark">15+ Лет</p>
-                    </div>
-                </div>
-
-                {/* Badge 2 - Bottom Left */}
-                <div className="floating-badge absolute bottom-[25%] left-[15%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
-                    <div className="w-8 h-8 rounded-lg bg-blue-900/10 flex items-center justify-center text-blue-900">
-                        <ShieldCheck size={18} />
-                    </div>
-                    <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Сертификация</p>
-                        <p className="text-sm font-bold text-brand-dark">ISO 9001</p>
-                    </div>
-                </div>
-
-                {/* Badge 3 - Top Right */}
-                <div className="floating-badge absolute top-[30%] right-[10%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
-                    <div className="w-8 h-8 rounded-lg bg-brand-green/10 flex items-center justify-center text-brand-green">
-                        <Users size={18} />
-                    </div>
-                    <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Клиенты</p>
-                        <p className="text-sm font-bold text-brand-dark">500+ B2B</p>
-                    </div>
-                </div>
-
-                {/* Badge 4 - Bottom Right */}
-                <div className="floating-badge absolute bottom-[30%] right-[12%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
-                    <div className="w-8 h-8 rounded-lg bg-blue-900/10 flex items-center justify-center text-blue-900">
-                        <Clock size={18} />
-                    </div>
-                    <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Поддержка</p>
-                        <p className="text-sm font-bold text-brand-dark">24/7 Сервис</p>
-                    </div>
+                {/* 🫧 Bubbles Particles 🫧 */}
+                <div className="absolute inset-0 overflow-hidden">
+                    {[...Array(12)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="hero-bubble absolute rounded-full bg-brand-green/10 border border-brand-green/20 backdrop-blur-[2px]"
+                            style={{
+                                width: Math.random() * 40 + 20 + 'px',
+                                height: Math.random() * 40 + 20 + 'px',
+                                left: Math.random() * 100 + '%',
+                                top: Math.random() * 100 + '%',
+                                opacity: 0.2
+                            }}
+                        />
+                    ))}
                 </div>
             </div>
+
+
 
             <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
