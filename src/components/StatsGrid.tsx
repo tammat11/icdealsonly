@@ -62,7 +62,7 @@ const StatsGrid = () => {
             <div className="max-w-7xl mx-auto px-6 relative z-10" ref={containerRef}>
 
                 {/* Header */}
-                <div className="mb-6 md:mb-10 text-center">
+                <div className="mb-4 md:mb-6 text-center">
                     <div className="section-tag">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
                         <span>Market Leadership</span>
@@ -72,27 +72,27 @@ const StatsGrid = () => {
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     {stats.map((stat, i) => (
                         <div
                             key={i}
-                            className="stat-card group relative h-[180px] md:h-[220px]"
+                            className="stat-card group relative h-[130px] md:h-[160px]"
                         >
-                            <div className="h-full rounded-[32px] p-6 md:p-8 transition-all duration-700 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-md hover:shadow-2xl bg-white border border-brand-dark/5 hover:-translate-y-2">
+                            <div className="h-full rounded-[24px] p-4 md:p-6 transition-all duration-700 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-md hover:shadow-2xl bg-white border border-brand-dark/5 hover:-translate-y-2">
 
                                 {/* Background Accent */}
                                 <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-brand-green/5 rounded-full blur-3xl group-hover:bg-brand-green/10 transition-all duration-700" />
 
                                 {/* Main Content centered */}
-                                <div className="relative z-10 flex flex-col items-center space-y-4">
-                                    <div className="w-12 h-12 rounded-2xl bg-brand-green/10 flex items-center justify-center text-brand-green group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-500">
+                                <div className="relative z-10 flex flex-col items-center space-y-1">
+                                    <div className="w-10 h-10 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-500">
                                         {stat.icon}
                                     </div>
                                     <div className="flex items-baseline justify-center gap-1">
-                                        <span className="stat-number font-bold tracking-tighter leading-none text-4xl md:text-5xl text-brand-green" data-value={stat.value}>0</span>
-                                        <span className="font-bold leading-none text-2xl md:text-3xl text-brand-green">{stat.suffix}</span>
+                                        <span className="stat-number font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green" data-value={stat.value}>0</span>
+                                        <span className="font-bold leading-none text-xl md:text-2xl text-brand-green">{stat.suffix}</span>
                                     </div>
-                                    <div className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">
+                                    <div className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">
                                         {stat.label}
                                     </div>
                                 </div>

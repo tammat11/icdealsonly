@@ -56,7 +56,7 @@ const ServicesSection = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} className="py-24 bg-white overflow-hidden" id="services">
+        <section ref={sectionRef} className="py-16 bg-white overflow-hidden" id="services">
             <style>{`
                 .service-fade-in {
                     opacity: 0;
@@ -80,23 +80,23 @@ const ServicesSection = () => {
             `}</style>
 
             <div className="max-w-7xl mx-auto px-6">
-                <div className={`mb-16 service-fade-in ${isVisible ? 'visible' : ''}`}>
+                <div className={`mb-16 text-center flex flex-col items-center service-fade-in ${isVisible ? 'visible' : ''}`}>
                     <div className="section-tag mb-4">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
-                        <span>Наш сервис</span>
+                        <span>НАШИ УСЛУГИ</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tighter uppercase whitespace-nowrap leading-[0.8]">
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tighter uppercase leading-[0.8]">
                         Создаем чистоту <br />
                         <span className="text-brand-green">по всему казахстану</span>
                     </h2>
                 </div>
 
                 {/* Main 4 Vertical Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
                     {mainServices.map((service, index) => (
                         <div
                             key={service.id}
-                            className={`group relative h-[500px] md:h-[600px] overflow-hidden rounded-[24px] cursor-pointer shadow-md hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 service-fade-in ${isVisible ? 'visible' : ''}`}
+                            className={`group relative h-[400px] md:h-[500px] overflow-hidden rounded-[24px] cursor-pointer shadow-md hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 service-fade-in ${isVisible ? 'visible' : ''}`}
                             style={{ transitionDelay: `${index * 100}ms` }}
                         >
                             <img
@@ -124,8 +124,8 @@ const ServicesSection = () => {
             </div>
 
             {/* Bottom Marquee for secondary cards */}
-            <div className={`relative border-t border-black/5 pt-16 service-fade-in ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '500ms' }}>
-                <div className="mb-8 px-6 max-w-7xl mx-auto">
+            <div className={`relative border-t border-black/5 pt-12 service-fade-in ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '500ms' }}>
+                <div className="mb-6 px-6 max-w-7xl mx-auto">
                     <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительные услуги</p>
                 </div>
 
@@ -134,7 +134,7 @@ const ServicesSection = () => {
                         {infiniteOthers.map((service, i) => (
                             <div
                                 key={`${service.id}-${i}`}
-                                className="flex-shrink-0 w-[220px] md:w-[260px] h-[300px] md:h-[350px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                                className="flex-shrink-0 w-[200px] md:w-[240px] h-[280px] md:h-[320px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
                             >
                                 <img
                                     src={service.image}

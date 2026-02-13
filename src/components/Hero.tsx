@@ -71,14 +71,14 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
     }, []);
 
     return (
-        <section ref={root} className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-20 px-6 overflow-hidden bg-white">
+        <section ref={root} className="relative min-h-[85vh] flex flex-col items-center justify-center pt-12 pb-12 px-6 overflow-hidden bg-white">
 
             <div className="absolute inset-0 bg-white" />
 
             <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
-                <div className="hero-fade-in mb-14">
-                    <img src="logo.png" alt="IC GROUP" className="h-28 md:h-36 w-auto object-contain opacity-80" />
+                <div className="hero-fade-in mb-8">
+                    <img src="logo.png" alt="IC GROUP" className="h-20 md:h-24 w-auto object-contain opacity-80" />
                 </div>
 
 
@@ -120,13 +120,13 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     </span>
                 </h1>
 
-                <div className="hero-fade-in max-w-2xl mb-14">
+                <div className="hero-fade-in max-w-2xl mb-8">
                     <p className="text-lg md:text-xl font-semibold text-brand-dark/50 tracking-tight leading-tight">
                         Лидер профессионального клиннинга в Казахстане. <br />
                     </p>
                 </div>
 
-                <div className="hero-fade-in flex flex-col items-center gap-8">
+                <div className="hero-fade-in flex flex-col items-center gap-6">
                     <button
                         onClick={onCalcOpen}
                         className="group relative px-12 py-6 overflow-hidden rounded-full transition-all duration-700 hover:scale-105 active:scale-95"
