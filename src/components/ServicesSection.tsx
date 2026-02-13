@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import {
     Building2,
     Waves,
@@ -16,7 +16,6 @@ import {
 
 const ServicesSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
-    const [isVisible, setIsVisible] = useState(false);
 
     const mainServices = [
         { id: "01", title: "Базовая уборка", icon: <Droplets className="w-6 h-6" />, image: "/basic-cleaning.png" },
@@ -36,43 +35,36 @@ const ServicesSection = () => {
         { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "/dry-cleaning.png" },
     ];
 
-
-
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
+        const ctx = gsap.context(() => {
+            gsap.to(".service-reveal", {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
                 }
-            },
-            { threshold: 0.1 }
-        );
+            });
+        }, sectionRef);
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => observer.disconnect();
+        return () => ctx.revert();
     }, []);
-
     return (
         <section ref={sectionRef} className="py-10 bg-white overflow-hidden" id="services">
             <style>{`
-                .service-fade-in {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-                }
-                .service-fade-in.visible {
-                    opacity: 1;
-                    transform: translateY(0);
+                .service-reveal {
+                    transform: translateY(40px);
                 }
                 @keyframes marquee-scroll {
                     0% { transform: translateX(0); }
                     100% { transform: translateX(-33.333%); }
                 }
                 .animate-marquee-slow {
-                    animation: marquee-scroll 80s linear infinite;
+                    animation: marquee-scroll 40s linear infinite;
                 }
                 .animate-marquee-slow:hover {
                     animation-play-state: paused;
@@ -80,7 +72,7 @@ const ServicesSection = () => {
             `}</style>
 
             <div className="max-w-7xl mx-auto px-6">
-                <div className={`mb-10 text-center flex flex-col items-center service-fade-in ${isVisible ? 'visible' : ''}`}>
+                <div className="mb-10 text-center flex flex-col items-center opacity-0 service-reveal">
                     <h2 className="mb-2">
                         НАШИ УСЛУГИ
                     </h2>
@@ -91,11 +83,10 @@ const ServicesSection = () => {
 
                 {/* Main 4 Vertical Cards */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                    {mainServices.map((service, index) => (
+                    {mainServices.map((service) => (
                         <div
                             key={service.id}
-                            className={`group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-700 hover:-translate-y-1 service-fade-in ${isVisible ? 'visible' : ''}`}
-                            style={{ transitionDelay: `${index * 100}ms` }}
+                            className="group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-700 hover:-translate-y-1 opacity-0 service-reveal scale-95"
                         >
                             <img
                                 src={service.image}
@@ -121,7 +112,7 @@ const ServicesSection = () => {
                 </div>
             </div>
 
-            <div className={`relative border-t border-black/5 pt-10 service-fade-in ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '500ms' }}>
+            <div className="relative border-t border-black/5 pt-10 opacity-0 service-reveal" style={{ transitionDelay: '500ms' }}>
                 <div className="mb-6 px-6 max-w-7xl mx-auto flex justify-between items-end">
                     <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
                     <div className="hidden md:flex gap-2">

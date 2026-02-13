@@ -2,11 +2,11 @@ import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 
 const clients = [
-    { name: "Technodom", domain: "technodom.kz" },
-    { name: "Forte Bank", domain: "forte.kz" },
-    { name: "H&M", domain: "hm.com" },
-    { name: "JTI", domain: "jti.com" },
-    { name: "KOTON", domain: "koton.com" },
+    { name: "Technodom", domain: "technodom.kz", logo: "/technodom-logo.png" },
+    { name: "Forte Bank", domain: "forte.kz", logo: "/forte-bank.png" },
+    { name: "H&M", domain: "hm.com", logo: "/hm-logo.png" },
+    { name: "JTI", domain: "jti.com", logo: "/jti-logo.png" },
+    { name: "KOTON", domain: "koton.com", logo: "/koton-logo.png" },
     { name: "Magnum", domain: "magnum.kz" },
     { name: "Kaspi Bank", domain: "kaspi.kz" },
     { name: "Bank RBK", domain: "bankrbk.kz" },
@@ -29,7 +29,7 @@ const ClientsMarquee = () => {
 
         const anim = gsap.to(marquee, {
             x: -totalWidth,
-            duration: 80,
+            duration: 40,
             repeat: -1,
             ease: "none"
         });
@@ -59,7 +59,7 @@ const ClientsMarquee = () => {
                                 >
                                     <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white border border-black/5 flex items-center justify-center p-6 transition-all duration-500 group-hover:border-brand-green/30 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] group-hover:-translate-y-2 relative overflow-hidden">
                                         <img
-                                            src={`https://logo.clearbit.com/${client.domain}`}
+                                            src={client.logo || `https://logo.clearbit.com/${client.domain}`}
                                             alt={client.name}
                                             className="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
                                             onError={(e) => {
