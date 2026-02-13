@@ -35,11 +35,13 @@ const ClientsMarquee = () => {
             duration: 40,
             repeat: -1,
             ease: "none",
+            force3D: true,
             scrollTrigger: {
                 trigger: marquee,
                 start: "top bottom",
                 end: "bottom top",
-                toggleActions: "play pause resume pause"
+                toggleActions: "play pause resume pause",
+                invalidateOnRefresh: true
             }
         });
 
@@ -58,7 +60,7 @@ const ClientsMarquee = () => {
             </div>
 
             <div className="relative">
-                <div ref={marqueeRef} className="flex whitespace-nowrap gap-8 md:gap-24 items-center w-max">
+                <div ref={marqueeRef} className="flex whitespace-nowrap gap-8 md:gap-24 items-center w-max will-change-transform">
                     {[1, 2, 3].map((set) => (
                         <div key={set} className="flex items-center gap-8 md:gap-24">
                             {clients.map((client, i) => (
@@ -71,6 +73,7 @@ const ClientsMarquee = () => {
                                             src={client.logo || `https://logo.clearbit.com/${client.domain}`}
                                             alt={client.name}
                                             className="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
+                                            loading="lazy"
                                             onError={(e) => {
                                                 const target = e.target as HTMLImageElement;
                                                 // Fallback to Google Favicon if Clearbit fails

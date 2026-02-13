@@ -51,7 +51,8 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     trigger: root.current,
                     start: "top bottom",
                     end: "bottom top",
-                    toggleActions: "play pause resume pause"
+                    toggleActions: "play pause resume pause",
+                    invalidateOnRefresh: true
                 }
             });
 
@@ -68,7 +69,8 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     trigger: root.current,
                     start: "top bottom",
                     end: "bottom top",
-                    toggleActions: "play pause resume pause"
+                    toggleActions: "play pause resume pause",
+                    invalidateOnRefresh: true
                 }
             });
 
@@ -104,7 +106,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
     }, []);
 
     return (
-        <section ref={root} className="relative min-h-[95vh] flex flex-col items-center justify-center pt-12 pb-12 px-6 overflow-hidden bg-white">
+        <section ref={root} className="relative min-h-[95svh] flex flex-col items-center justify-center pt-12 pb-12 px-6 overflow-hidden bg-white">
 
             {/* --- Premium Background Layer --- */}
             <div className="absolute inset-0 pointer-events-none">
@@ -118,7 +120,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     {[...Array(8)].map((_, i) => (
                         <div
                             key={i}
-                            className={`hero-bubble absolute rounded-full bg-white/40 border border-brand-green/30 ${i > 4 ? 'hidden md:block' : ''} md:backdrop-blur-[6px] md:shadow-[0_8px_32px_0_rgba(162,192,55,0.1)] will-change-transform`}
+                            className={`hero-bubble absolute rounded-full bg-white/20 border border-brand-green/20 ${i > 4 ? 'hidden md:block' : ''} md:shadow-[0_8px_32px_0_rgba(162,192,55,0.05)] will-change-transform`}
                             style={{
                                 width: Math.random() * 60 + 30 + 'px',
                                 height: Math.random() * 60 + 30 + 'px',
@@ -185,7 +187,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 <div className="hero-fade-in flex flex-col items-center gap-6">
                     <button
                         onClick={onCalcOpen}
-                        className="group relative px-12 py-6 overflow-hidden rounded-full transition-all duration-700 hover:scale-105 active:scale-95 shadow-xl shadow-brand-dark/10"
+                        className="group relative px-12 py-6 overflow-hidden rounded-full transition-[box-shadow,transform,background-color] duration-500 hover:scale-105 active:scale-95 shadow-xl shadow-brand-dark/10"
                     >
                         <div className="absolute inset-0 bg-brand-dark group-hover:bg-brand-green transition-colors duration-700" />
                         <span className="relative z-10 !text-white text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#FFFFFF' }}>Оставить заявку</span>

@@ -33,6 +33,7 @@ const StatsGrid = () => {
                     scrollTrigger: {
                         trigger: htmlTarget,
                         start: "top 90%",
+                        invalidateOnRefresh: true
                     },
                     onUpdate: () => {
                         htmlTarget.innerText = Math.floor(obj.val).toLocaleString();
@@ -49,7 +50,8 @@ const StatsGrid = () => {
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top 90%",
+                    start: "top 95%",
+                    invalidateOnRefresh: true
                 }
             });
         }, sectionRef);
@@ -77,7 +79,7 @@ const StatsGrid = () => {
                             key={i}
                             className="stat-card group relative h-[130px] md:h-[160px]"
                         >
-                            <div className="h-full rounded-[24px] p-4 md:p-6 transition-all duration-700 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-md hover:shadow-2xl bg-white border border-brand-dark/5 hover:-translate-y-2">
+                            <div className="h-full rounded-[24px] p-4 md:p-6 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-md hover:shadow-2xl bg-white border border-brand-dark/5 hover:-translate-y-2 transition-[box-shadow,transform,background-color] duration-500">
 
                                 {/* Background Accent */}
                                 <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-brand-green/5 rounded-full blur-3xl group-hover:bg-brand-green/10 transition-all duration-700" />
@@ -88,7 +90,7 @@ const StatsGrid = () => {
                                         {stat.icon}
                                     </div>
                                     <div className="flex items-baseline justify-center gap-1">
-                                        <span className="stat-number font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green" data-value={stat.value}>0</span>
+                                        <span className="stat-number font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green tabular-nums" data-value={stat.value}>0</span>
                                         <span className="font-bold leading-none text-xl md:text-2xl text-brand-green">{stat.suffix}</span>
                                     </div>
                                     <div className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">

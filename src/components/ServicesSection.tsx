@@ -83,7 +83,8 @@ const ServicesSection = () => {
                     trigger: marquee,
                     start: "top bottom",
                     end: "bottom top",
-                    onToggle: (self) => isInView = self.isActive
+                    onToggle: (self) => isInView = self.isActive,
+                    invalidateOnRefresh: true
                 });
 
                 const tick = () => {
@@ -106,7 +107,7 @@ const ServicesSection = () => {
                     if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
                     if (xPos.current >= 0) xPos.current -= totalWidth;
 
-                    gsap.set(marquee, { x: xPos.current });
+                    gsap.set(marquee, { x: xPos.current, force3D: true });
                 };
 
                 gsap.ticker.add(tick);
@@ -140,12 +141,13 @@ const ServicesSection = () => {
                     {mainServices.map((service) => (
                         <div
                             key={service.id}
-                            className="group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-700 hover:-translate-y-1 opacity-0 service-reveal scale-95"
+                            className="group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-[box-shadow,transform,background-color] duration-500 hover:-translate-y-1 opacity-0 service-reveal scale-95 will-change-transform"
                         >
                             <img
                                 src={service.image}
                                 alt={service.title}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -246,18 +248,19 @@ const ServicesSection = () => {
                         window.addEventListener('touchend', onTouchEnd);
                     }}
                 >
-                    <div ref={marqueeRef} className="flex gap-4 py-4">
+                    <div ref={marqueeRef} className="flex gap-4 py-4 will-change-transform">
                         {[1, 2, 3].map((set) => (
                             <div key={set} className="flex gap-4 min-w-max">
                                 {otherServices.map((service) => (
                                     <div
                                         key={`${set}-${service.id}`}
-                                        className="w-[240px] md:w-[280px] h-[320px] md:h-[360px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                                        className="w-[240px] md:w-[280px] h-[320px] md:h-[360px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-[box-shadow,background-color] duration-500"
                                     >
                                         <img
                                             src={service.image}
                                             alt={service.title}
                                             className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                                            loading="lazy"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 

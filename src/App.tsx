@@ -30,26 +30,8 @@ function App() {
     window.addEventListener('resize', handleResize);
 
     const ctx = gsap.context(() => {
-      // reveal-section logic
-      const reveals = document.querySelectorAll('.reveal-section');
-      reveals.forEach((el) => {
-        gsap.fromTo(el,
-          { opacity: 0, y: 50 },
-          {
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none none",
-              once: true
-            },
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power2.out",
-            overwrite: 'auto'
-          }
-        );
-      });
+      // Cleanup: reveal-section logic removed as it was not used in any components
+      ScrollTrigger.refresh();
 
       ScrollTrigger.refresh();
     }, mainRef);
