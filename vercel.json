@@ -4,17 +4,13 @@
     "framework": "vite",
     "rewrites": [
         {
-            "source": "/deals/(.*)",
-            "destination": "/deals/$1"
-        },
-        {
-            "source": "/deals",
-            "destination": "/deals/index.html"
+            "source": "/(.*)",
+            "destination": "/$1"
         }
     ],
     "headers": [
         {
-            "source": "/deals/(.*)",
+            "source": "/(.*)",
             "headers": [
                 {
                     "key": "Cache-Control",
