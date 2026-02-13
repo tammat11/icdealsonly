@@ -106,7 +106,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
     }, []);
 
     return (
-        <section ref={root} className="relative min-h-[95svh] flex flex-col items-center justify-center pt-12 pb-12 px-6 overflow-hidden bg-white">
+        <section ref={root} className="relative min-h-[100svh] flex flex-col items-center justify-center pt-20 pb-12 px-6 overflow-hidden bg-white">
 
             {/* --- Premium Background Layer --- */}
             <div className="absolute inset-0 pointer-events-none">
