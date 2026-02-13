@@ -1,8 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef, useState } from 'react';
 
 const ApplicationForm = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -12,23 +8,6 @@ const ApplicationForm = () => {
         comment: ''
     });
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.from(".form-reveal", {
-                y: 30,
-                opacity: 0,
-                stagger: 0.1,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 80%",
-                }
-            });
-        }, sectionRef);
-        return () => ctx.revert();
-    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -42,12 +21,6 @@ const ApplicationForm = () => {
             return;
         }
 
-        // Prepare fields for Bitrix24
-        // UF_CRM_1728031304072 - номер
-        // UF_CRM_1728030866213 - фио
-        // COMMENTS - комментарий
-        // CATEGORY_ID: 0 (General funnel)
-        // STAGE_ID: "NEW" (Default first stage)
         const payload = {
             fields: {
                 TITLE: `Заявка с сайта от ${formData.name}`,
@@ -72,7 +45,6 @@ const ApplicationForm = () => {
             if (response.ok) {
                 setStatus('success');
                 setFormData({ name: '', phone: '', comment: '' });
-                // Reset success message after 5 seconds
                 setTimeout(() => setStatus('idle'), 5000);
             } else {
                 console.error("Bitrix error", await response.text());
@@ -87,35 +59,20 @@ const ApplicationForm = () => {
     const formatPhoneNumber = (value: string) => {
         const numbers = value.replace(/\D/g, '');
         if (numbers.length === 0) return '';
-
         let formatted = '+7';
-
-        // Skip the first digit if it's 7 or 8 (we already have +7)
         const digits = (numbers.startsWith('7') || numbers.startsWith('8'))
             ? numbers.slice(1)
             : numbers;
-
         const trimmed = digits.slice(0, 10);
-
-        if (trimmed.length > 0) {
-            formatted += ` (${trimmed.slice(0, 3)}`;
-        }
-        if (trimmed.length >= 4) {
-            formatted += `) ${trimmed.slice(3, 6)}`;
-        }
-        if (trimmed.length >= 7) {
-            formatted += `-${trimmed.slice(6, 8)}`;
-        }
-        if (trimmed.length >= 9) {
-            formatted += `-${trimmed.slice(8, 10)}`;
-        }
-
+        if (trimmed.length > 0) formatted += ` (${trimmed.slice(0, 3)}`;
+        if (trimmed.length >= 4) formatted += `) ${trimmed.slice(3, 6)}`;
+        if (trimmed.length >= 7) formatted += `-${trimmed.slice(6, 8)}`;
+        if (trimmed.length >= 9) formatted += `-${trimmed.slice(8, 10)}`;
         return formatted;
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-
         if (name === 'phone') {
             setFormData(prev => ({
                 ...prev,
@@ -131,7 +88,7 @@ const ApplicationForm = () => {
 
     return (
         <section ref={sectionRef} id="contact-form" className="py-24 bg-white">
-            <div className="max-w-7xl mx-auto px-6 mb-12 text-center flex flex-col items-center form-reveal">
+            <div className="max-w-7xl mx-auto px-6 mb-12 text-center flex flex-col items-center on-reveal">
                 <h2 className="mb-2">
                     ОСТАВИТЬ ЗАЯВКУ
                 </h2>
@@ -141,7 +98,7 @@ const ApplicationForm = () => {
             </div>
 
             <div className="max-w-4xl mx-auto px-6">
-                <div className="bg-gradient-to-br from-[#1a1c23] to-[#0f1115] text-white p-8 md:p-16 rounded-[40px] relative overflow-hidden shadow-2xl form-reveal border border-white/5">
+                <div className="bg-gradient-to-br from-[#1a1c23] to-[#0f1115] text-white p-8 md:p-16 rounded-[40px] relative overflow-hidden shadow-2xl on-reveal border border-white/5">
                     {/* Decorative Elements */}
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/20 rounded-full blur-[80px] pointer-events-none opacity-50" />
                     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900/20 rounded-full blur-[80px] pointer-events-none opacity-50" />

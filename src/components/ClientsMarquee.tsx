@@ -1,9 +1,3 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
 const clients = [
     { name: "Technodom", domain: "technodom.kz", logo: "/technodom-logo.png" },
     { name: "Forte Bank", domain: "forte.kz", logo: "/forte-bank.png" },
@@ -22,37 +16,9 @@ const clients = [
 ];
 
 const ClientsMarquee = () => {
-    const marqueeRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const marquee = marqueeRef.current;
-        if (!marquee) return;
-
-        const totalWidth = marquee.scrollWidth / 3;
-
-        const anim = gsap.to(marquee, {
-            x: -totalWidth,
-            duration: 40,
-            repeat: -1,
-            ease: "none",
-            force3D: true,
-            scrollTrigger: {
-                trigger: marquee,
-                start: "top bottom",
-                end: "bottom top",
-                toggleActions: "play pause resume pause",
-                invalidateOnRefresh: true
-            }
-        });
-
-        return () => {
-            anim.kill();
-        };
-    }, []);
-
     return (
         <section className="py-20 bg-white border-y border-black/5 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 mb-12">
+            <div className="max-w-7xl mx-auto px-6 mb-12 on-reveal">
                 <div className="flex items-center gap-6">
                     <span className="text-[12px] font-black uppercase tracking-[0.3em] text-brand-dark/30 whitespace-nowrap">Наши ключевые партнеры</span>
                     <div className="h-px w-full bg-black/5" />
@@ -60,7 +26,7 @@ const ClientsMarquee = () => {
             </div>
 
             <div className="relative">
-                <div ref={marqueeRef} className="flex whitespace-nowrap gap-8 md:gap-24 items-center w-max will-change-transform">
+                <div className="flex whitespace-nowrap gap-8 md:gap-24 items-center w-max animate-marquee-css will-change-transform">
                     {[1, 2, 3].map((set) => (
                         <div key={set} className="flex items-center gap-8 md:gap-24">
                             {clients.map((client, i) => (
@@ -76,11 +42,9 @@ const ClientsMarquee = () => {
                                             loading="lazy"
                                             onError={(e) => {
                                                 const target = e.target as HTMLImageElement;
-                                                // Fallback to Google Favicon if Clearbit fails
                                                 if (!target.src.includes('google.com')) {
                                                     target.src = `https://www.google.com/s2/favicons?sz=128&domain=${client.domain}`;
                                                 } else {
-                                                    // Ultimate fallback: Initials
                                                     target.style.display = 'none';
                                                     const parent = target.parentElement;
                                                     if (parent) {
@@ -90,7 +54,6 @@ const ClientsMarquee = () => {
                                                 }
                                             }}
                                         />
-                                        {/* Background gradient on hover */}
                                         <div className="absolute inset-0 bg-gradient-to-tr from-brand-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </div>
                                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-dark/20 group-hover:text-brand-green transition-colors duration-500">
@@ -102,7 +65,6 @@ const ClientsMarquee = () => {
                     ))}
                 </div>
 
-                {/* Visual fading for seamless loop edges */}
                 <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-20" />
                 <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-white via-white/80 to-transparent z-20" />
             </div>

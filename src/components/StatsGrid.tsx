@@ -1,14 +1,6 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Users, Calendar, Maximize, PieChart, Truck, Briefcase } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const StatsGrid = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-
     const stats = [
         { value: "5000", suffix: "+", label: "СОТРУДНИКОВ В\nХОЛДИНГЕ", icon: <Users className="w-6 h-6" /> },
         { value: "19", suffix: "", label: "ЛЕТ НА РЫНКЕ\nКАЗАХСТАНА", icon: <Calendar className="w-6 h-6" /> },
@@ -18,52 +10,11 @@ const StatsGrid = () => {
         { value: "500", suffix: "+", label: "КОРПОРАТИВНЫХ\nКЛИЕНТОВ", icon: <Briefcase className="w-6 h-6" /> },
     ];
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            const targets = document.querySelectorAll(".stat-number");
-            targets.forEach((target) => {
-                const htmlTarget = target as HTMLElement;
-                const endValue = parseFloat(htmlTarget.getAttribute("data-value") || "0");
-
-                const obj = { val: 0 };
-                gsap.to(obj, {
-                    val: endValue,
-                    duration: 2,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: htmlTarget,
-                        start: "top 90%",
-                        invalidateOnRefresh: true
-                    },
-                    onUpdate: () => {
-                        htmlTarget.innerText = Math.floor(obj.val).toLocaleString();
-                    }
-                });
-            });
-
-            // Global Cards Reveal
-            gsap.from(".stat-card", {
-                y: 40,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 95%",
-                    invalidateOnRefresh: true
-                }
-            });
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
-
     return (
-        <section ref={sectionRef} className="section-padding-compact bg-white relative overflow-hidden" id="stats">
-            <div className="max-w-7xl mx-auto px-6 relative z-10" ref={containerRef}>
+        <section className="section-padding-compact bg-white relative overflow-hidden" id="stats">
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-                <div className="mb-4 md:mb-6 text-center">
+                <div className="mb-4 md:mb-6 text-center on-reveal">
                     <div className="section-tag">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
                         <span>Наш масштаб</span>
@@ -77,7 +28,8 @@ const StatsGrid = () => {
                     {stats.map((stat, i) => (
                         <div
                             key={i}
-                            className="stat-card group relative h-[130px] md:h-[160px]"
+                            className="group relative h-[130px] md:h-[160px] on-reveal"
+                            style={{ transitionDelay: `${i * 0.1}s` }}
                         >
                             <div className="h-full rounded-[24px] p-4 md:p-6 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-md hover:shadow-2xl bg-white border border-brand-dark/5 hover:-translate-y-2 transition-[box-shadow,transform,background-color] duration-500">
 
@@ -90,7 +42,7 @@ const StatsGrid = () => {
                                         {stat.icon}
                                     </div>
                                     <div className="flex items-baseline justify-center gap-1">
-                                        <span className="stat-number font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green tabular-nums" data-value={stat.value}>0</span>
+                                        <span className="font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green tabular-nums">{stat.value}</span>
                                         <span className="font-bold leading-none text-xl md:text-2xl text-brand-green">{stat.suffix}</span>
                                     </div>
                                     <div className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">

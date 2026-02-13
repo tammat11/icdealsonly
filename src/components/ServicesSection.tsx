@@ -1,8 +1,3 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 import {
     Building2,
     Waves,
@@ -19,12 +14,6 @@ import {
 } from 'lucide-react';
 
 const ServicesSection = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const marqueeRef = useRef<HTMLDivElement>(null);
-    const isDragging = useRef(false);
-    const xPos = useRef(0);
-    const velocity = useRef(0);
-
     const mainServices = [
         { id: "01", title: "Базовая уборка", icon: <Droplets className="w-6 h-6" />, image: "/basic-cleaning.png" },
         { id: "02", title: "Поддерживающая уборка", icon: <Wind className="w-6 h-6" />, image: "/maintenance-cleaning.png" },
@@ -43,91 +32,10 @@ const ServicesSection = () => {
         { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "/dry-cleaning.png" },
     ];
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Main Services: Snappier reveal
-            gsap.to(".service-reveal", {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.6,
-                stagger: 0.05,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 85%",
-                }
-            });
-
-            // "Train" entrance for Other Services Marquee
-            gsap.fromTo(".marquee-train-entrance",
-                { x: "100%", opacity: 0 },
-                {
-                    x: 0,
-                    opacity: 1,
-                    duration: 1.5,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: ".marquee-train-entrance",
-                        start: "top 90%",
-                    }
-                }
-            );
-
-            // Ticker-based Infinite Marquee
-            if (marqueeRef.current) {
-                const marquee = marqueeRef.current;
-                let isInView = false;
-
-                ScrollTrigger.create({
-                    trigger: marquee,
-                    start: "top bottom",
-                    end: "bottom top",
-                    onToggle: (self) => isInView = self.isActive,
-                    invalidateOnRefresh: true
-                });
-
-                const tick = () => {
-                    if (!marquee || !isInView) return;
-
-                    const totalWidth = marquee.scrollWidth / 3;
-                    if (totalWidth <= 0) return;
-
-                    if (xPos.current === 0) xPos.current = -totalWidth;
-
-                    if (!isDragging.current) {
-                        // Momentum + Smooth transition back to auto-scroll
-                        xPos.current += velocity.current;
-
-                        // Revert back to auto-speed smoothly
-                        const targetSpeed = -1.0;
-                        velocity.current += (targetSpeed - velocity.current) * 0.05;
-                    }
-
-                    if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
-                    if (xPos.current >= 0) xPos.current -= totalWidth;
-
-                    gsap.set(marquee, { x: xPos.current, force3D: true });
-                };
-
-                gsap.ticker.add(tick);
-                return () => gsap.ticker.remove(tick);
-            }
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
-
     return (
-        <section ref={sectionRef} className="py-10 bg-white overflow-hidden" id="services">
-            <style>{`
-                .service-reveal {
-                    transform: translateY(40px);
-                }
-            `}</style>
-
+        <section className="py-10 bg-white overflow-hidden" id="services">
             <div className="max-w-7xl mx-auto px-6">
-                <div className="mb-10 text-center flex flex-col items-center opacity-0 service-reveal">
+                <div className="mb-10 text-center flex flex-col items-center on-reveal">
                     <h2 className="mb-2">
                         НАШИ УСЛУГИ
                     </h2>
@@ -138,10 +46,11 @@ const ServicesSection = () => {
 
                 {/* Main 4 Vertical Cards */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                    {mainServices.map((service) => (
+                    {mainServices.map((service, i) => (
                         <div
                             key={service.id}
-                            className="group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-[box-shadow,transform,background-color] duration-500 hover:-translate-y-1 opacity-0 service-reveal scale-95 will-change-transform"
+                            className="group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-[box-shadow,transform,background-color] duration-500 hover:-translate-y-1 on-reveal will-change-transform"
+                            style={{ transitionDelay: `${i * 0.1}s` }}
                         >
                             <img
                                 src={service.image}
@@ -168,7 +77,7 @@ const ServicesSection = () => {
                 </div>
             </div>
 
-            <div className="relative border-t border-black/5 pt-10 marquee-train-entrance opacity-0">
+            <div className="relative border-t border-black/5 pt-10 on-reveal">
                 <div className="mb-6 px-6 max-w-7xl mx-auto flex justify-between items-end">
                     <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
                     <div className="hidden md:flex gap-2">
@@ -177,78 +86,9 @@ const ServicesSection = () => {
                 </div>
 
                 <div
-                    className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
-                    style={{ willChange: 'transform' }}
-                    onMouseDown={(e) => {
-                        if (!marqueeRef.current) return;
-                        isDragging.current = true;
-                        let startX = e.pageX;
-                        let initialX = xPos.current;
-
-                        const onMouseMove = (moveE: MouseEvent) => {
-                            const prevX = xPos.current;
-                            const deltaX = moveE.pageX - startX;
-                            xPos.current = initialX + deltaX;
-
-                            velocity.current = xPos.current - prevX;
-
-                            const totalWidth = marqueeRef.current!.scrollWidth / 3;
-                            if (xPos.current <= -totalWidth * 2) {
-                                xPos.current += totalWidth;
-                                initialX += totalWidth;
-                            }
-                            if (xPos.current >= 0) {
-                                xPos.current -= totalWidth;
-                                initialX -= totalWidth;
-                            }
-                            gsap.set(marqueeRef.current, { x: xPos.current });
-                        };
-
-                        const onMouseUp = () => {
-                            window.removeEventListener('mousemove', onMouseMove);
-                            window.removeEventListener('mouseup', onMouseUp);
-                            isDragging.current = false;
-                        };
-
-                        window.addEventListener('mousemove', onMouseMove);
-                        window.addEventListener('mouseup', onMouseUp);
-                    }}
-                    onTouchStart={(e) => {
-                        if (!marqueeRef.current) return;
-                        isDragging.current = true;
-                        let startX = e.touches[0].pageX;
-                        let initialX = xPos.current;
-
-                        const onTouchMove = (moveE: TouchEvent) => {
-                            const prevX = xPos.current;
-                            const deltaX = moveE.touches[0].pageX - startX;
-                            xPos.current = initialX + deltaX;
-
-                            velocity.current = xPos.current - prevX;
-
-                            const totalWidth = marqueeRef.current!.scrollWidth / 3;
-                            if (xPos.current <= -totalWidth * 2) {
-                                xPos.current += totalWidth;
-                                initialX += totalWidth;
-                            }
-                            if (xPos.current >= 0) {
-                                xPos.current -= totalWidth;
-                                initialX -= totalWidth;
-                            }
-                            gsap.set(marqueeRef.current, { x: xPos.current });
-                        };
-
-                        const onTouchEnd = () => {
-                            window.removeEventListener('touchmove', onTouchMove);
-                            window.removeEventListener('touchend', onTouchEnd);
-                            isDragging.current = false;
-                        };
-
-                        window.addEventListener('touchmove', onTouchMove);
-                        window.addEventListener('touchend', onTouchEnd);
-                    }}
+                    className="relative w-full overflow-hidden touch-pan-y"
                 >
-                    <div ref={marqueeRef} className="flex gap-4 py-4 will-change-transform">
+                    <div className="flex gap-4 py-4 animate-marquee-css will-change-transform">
                         {[1, 2, 3].map((set) => (
                             <div key={set} className="flex gap-4 min-w-max">
                                 {otherServices.map((service) => (
