@@ -164,16 +164,14 @@
 
 /* Premium Reveal System */
 .reveal-text {
-  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-  transform: translateY(20px);
-  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
   opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .reveal-text.visible {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  transform: translateY(0);
   opacity: 1;
+  transform: translateY(0);
 }
 
 .on-reveal {
@@ -228,15 +226,15 @@
   will-change: transform;
 }
 
-/* Cleaner Animation Refined */
+/* Cleaner Animation - ZigZag Version Fix */
 @keyframes cleaner-hand {
   0% {
-    transform: translate(300px, 100px) rotate(30deg);
+    transform: translate(150%, 50%) rotate(30deg);
     opacity: 0;
   }
 
   15% {
-    transform: translate(20px, -5px) rotate(0deg);
+    transform: translate(10%, -10px) rotate(0deg);
     opacity: 1;
   }
 
@@ -244,24 +242,24 @@
   35%,
   45%,
   55% {
-    transform: translate(-20px, 5px) rotate(-5deg);
+    transform: translate(-30%, 5px) rotate(-10deg);
     opacity: 1;
   }
 
   30%,
   40%,
   50% {
-    transform: translate(20px, -5px) rotate(0deg);
+    transform: translate(10%, -10px) rotate(0deg);
     opacity: 1;
   }
 
   70% {
-    transform: translate(-400px, 200px) rotate(-40deg);
+    transform: translate(-200%, 100%) rotate(-40deg);
     opacity: 0;
   }
 
   100% {
-    transform: translate(-400px, 200px) rotate(-40deg);
+    transform: translate(-200%, 100%) rotate(-40deg);
     opacity: 0;
   }
 }
@@ -296,14 +294,14 @@
     opacity: 0;
   }
 
-  70% {
+  65% {
     transform: scale(1.5) rotate(45deg);
     opacity: 1;
   }
 
-  85%,
+  75%,
   100% {
-    transform: scale(0) rotate(45deg);
+    transform: scale(0) rotate(90deg);
     opacity: 0;
   }
 }
@@ -335,7 +333,7 @@
 }
 
 .animate-title-reveal {
-  animation: title-pop 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: title-pop 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 /* Glossy Button Effect */
