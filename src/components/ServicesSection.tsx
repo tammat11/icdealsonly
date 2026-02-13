@@ -85,9 +85,9 @@ const ServicesSection = () => {
                 </div>
 
                 <div
-                    className="relative w-full overflow-hidden touch-pan-y"
+                    className="relative w-full overflow-x-auto no-scrollbar touch-pan-x"
                 >
-                    <div className="flex gap-4 py-4 animate-marquee-css will-change-transform">
+                    <div className="flex gap-4 py-4 animate-marquee-css will-change-transform hover:pause-animation min-w-max">
                         {[1, 2, 3].map((set) => (
                             <div key={set} className="flex gap-4 min-w-max">
                                 {otherServices.map((service) => (

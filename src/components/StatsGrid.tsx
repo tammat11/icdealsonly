@@ -1,4 +1,51 @@
 import { Users, Calendar, Maximize, PieChart, Truck, Briefcase } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+
+const CountUp = ({ end, duration = 2000 }: { end: string, duration?: number }) => {
+    const [count, setCount] = useState(0);
+    const elementRef = useRef<HTMLSpanElement>(null);
+    const numericEnd = parseFloat(end.replace(/,/g, '.'));
+    const isFloat = end.includes('.') || end.includes(',');
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    let startTime: number | null = null;
+                    const step = (timestamp: number) => {
+                        if (!startTime) startTime = timestamp;
+                        const progress = Math.min((timestamp - startTime) / duration, 1);
+
+                        // Easing function for smooth stop
+                        const easeOutQuart = (x: number): number => 1 - Math.pow(1 - x, 4);
+
+                        const current = numericEnd * easeOutQuart(progress);
+                        setCount(current);
+
+                        if (progress < 1) {
+                            window.requestAnimationFrame(step);
+                        }
+                    };
+                    window.requestAnimationFrame(step);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.5 }
+        );
+
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [numericEnd, duration]);
+
+    return (
+        <span ref={elementRef}>
+            {isFloat ? count.toFixed(1) : Math.floor(count)}
+        </span>
+    );
+};
 
 const StatsGrid = () => {
     const stats = [
@@ -41,7 +88,9 @@ const StatsGrid = () => {
                                         {stat.icon}
                                     </div>
                                     <div className="flex items-baseline justify-center gap-1">
-                                        <span className="font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green tabular-nums">{stat.value}</span>
+                                        <span className="font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green tabular-nums">
+                                            <CountUp end={stat.value} />
+                                        </span>
                                         <span className="font-bold leading-none text-xl md:text-2xl text-brand-green">{stat.suffix}</span>
                                     </div>
                                     <div className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">

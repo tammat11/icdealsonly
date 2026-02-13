@@ -25,7 +25,7 @@ const ClientsMarquee = () => {
                 </div>
             </div>
 
-            <div className="relative">
+            <div className="relative on-reveal stagger-2">
                 <div className="flex whitespace-nowrap gap-8 md:gap-24 items-center w-max animate-marquee-css will-change-transform">
                     {[1, 2, 3].map((set) => (
                         <div key={set} className="flex items-center gap-8 md:gap-24">

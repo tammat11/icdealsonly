@@ -131,7 +131,7 @@ const ApplicationForm = () => {
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2 group">
+                                <div className="space-y-2 group on-reveal stagger-1">
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Ваше имя</label>
                                     <input
                                         name="name"
@@ -143,7 +143,7 @@ const ApplicationForm = () => {
                                         className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl px-6 py-5 placeholder:text-white/20 focus:outline-none focus:border-brand-green/50 focus:bg-white/[0.08] transition-all hover:bg-white/[0.05] text-white"
                                     />
                                 </div>
-                                <div className="space-y-2 group">
+                                <div className="space-y-2 group on-reveal stagger-2">
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Телефон</label>
                                     <input
                                         name="phone"
@@ -156,7 +156,7 @@ const ApplicationForm = () => {
                                     />
                                 </div>
 
-                                <div className="space-y-2 md:col-span-2 group">
+                                <div className="space-y-2 md:col-span-2 group on-reveal stagger-3">
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Комментарий</label>
                                     <textarea
                                         name="comment"
@@ -168,7 +168,7 @@ const ApplicationForm = () => {
                                     />
                                 </div>
 
-                                <div className="md:col-span-2 mt-6">
+                                <div className="md:col-span-2 mt-6 on-reveal stagger-4">
                                     <button
                                         type="submit"
                                         disabled={status === 'submitting'}
