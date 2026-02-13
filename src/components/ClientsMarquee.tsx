@@ -34,11 +34,11 @@ const ClientsMarquee = () => {
                                     key={`${set}-${i}`}
                                     className="flex flex-col items-center gap-4 group cursor-default"
                                 >
-                                    <div className="w-20 h-20 md:w-32 md:h-32 rounded-full bg-white border border-black/5 flex items-center justify-center p-6 transition-all duration-500 group-hover:border-brand-green/30 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] group-hover:-translate-y-2 relative overflow-hidden">
+                                    <div className="w-20 h-20 md:w-32 md:h-32 rounded-full bg-white border border-black/5 flex items-center justify-center p-6 card-premium-hover relative overflow-hidden">
                                         <img
                                             src={client.logo || `https://logo.clearbit.com/${client.domain}`}
                                             alt={client.name}
-                                            className="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-110"
+                                            className="w-full h-full object-contain relative z-10 transition-transform duration-700 group-hover:scale-110"
                                             loading="lazy"
                                             onError={(e) => {
                                                 const target = e.target as HTMLImageElement;

@@ -49,8 +49,7 @@ const ServicesSection = () => {
                     {mainServices.map((service, i) => (
                         <div
                             key={service.id}
-                            className="group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-[box-shadow,transform,background-color] duration-500 hover:-translate-y-1 on-reveal will-change-transform"
-                            style={{ transitionDelay: `${i * 0.1}s` }}
+                            className={`group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer bg-white on-reveal stagger-${(i % 4) + 1} card-premium-hover`}
                         >
                             <img
                                 src={service.image}

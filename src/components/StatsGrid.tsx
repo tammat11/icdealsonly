@@ -28,10 +28,9 @@ const StatsGrid = () => {
                     {stats.map((stat, i) => (
                         <div
                             key={i}
-                            className="group relative h-[130px] md:h-[160px] on-reveal"
-                            style={{ transitionDelay: `${i * 0.1}s` }}
+                            className={`group relative h-[130px] md:h-[160px] on-reveal stagger-${(i % 6) + 1}`}
                         >
-                            <div className="h-full rounded-[24px] p-4 md:p-6 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-md hover:shadow-2xl bg-white border border-brand-dark/5 hover:-translate-y-2 transition-[box-shadow,transform,background-color] duration-500">
+                            <div className="h-full rounded-[24px] p-4 md:p-6 flex flex-col items-center justify-center text-center overflow-hidden relative bg-white border border-brand-dark/5 card-premium-hover">
 
                                 {/* Background Accent */}
                                 <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-brand-green/5 rounded-full blur-3xl group-hover:bg-brand-green/10 transition-all duration-700" />
