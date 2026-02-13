@@ -231,35 +231,37 @@
 /* Cleaner Animation Refined */
 @keyframes cleaner-hand {
   0% {
-    transform: translate(150%, 100%) rotate(45deg);
+    transform: translate(300px, 100px) rotate(30deg);
     opacity: 0;
   }
 
-  10% {
-    transform: translate(50%, 0) rotate(0deg);
+  15% {
+    transform: translate(20px, -5px) rotate(0deg);
     opacity: 1;
-  }
-
-  20%,
-  30%,
-  40%,
-  50% {
-    transform: translate(-30%, 5px) rotate(-10deg);
   }
 
   25%,
   35%,
-  45% {
-    transform: translate(30%, -5px) rotate(5deg);
+  45%,
+  55% {
+    transform: translate(-20px, 5px) rotate(-5deg);
+    opacity: 1;
   }
 
-  60% {
-    transform: translate(-150%, 100%) rotate(-30deg);
+  30%,
+  40%,
+  50% {
+    transform: translate(20px, -5px) rotate(0deg);
+    opacity: 1;
+  }
+
+  70% {
+    transform: translate(-400px, 200px) rotate(-40deg);
     opacity: 0;
   }
 
   100% {
-    transform: translate(-150%, 100%) rotate(-30deg);
+    transform: translate(-400px, 200px) rotate(-40deg);
     opacity: 0;
   }
 }
@@ -267,17 +269,10 @@
 @keyframes cleaner-dirt {
 
   0%,
-  15% {
+  25% {
     opacity: 0.4;
     transform: scale(1);
     filter: blur(0);
-  }
-
-  20%,
-  45% {
-    opacity: 0.1;
-    transform: scale(1.05);
-    filter: blur(8px);
   }
 
   55% {
@@ -296,33 +291,33 @@
 @keyframes cleaner-sparkle {
 
   0%,
-  58% {
+  55% {
     transform: scale(0) rotate(-45deg);
     opacity: 0;
   }
 
-  65% {
-    transform: scale(1.8) rotate(45deg);
+  70% {
+    transform: scale(1.5) rotate(45deg);
     opacity: 1;
   }
 
-  75%,
+  85%,
   100% {
-    transform: scale(0) rotate(90deg);
+    transform: scale(0) rotate(45deg);
     opacity: 0;
   }
 }
 
 .animate-cleaner-hand {
-  animation: cleaner-hand 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: cleaner-hand 4s ease-in-out infinite;
 }
 
 .animate-cleaner-dirt {
-  animation: cleaner-dirt 5s ease-out infinite;
+  animation: cleaner-dirt 4s ease-in-out infinite;
 }
 
 .animate-cleaner-sparkle {
-  animation: cleaner-sparkle 5s ease-out infinite;
+  animation: cleaner-sparkle 4s ease-in-out infinite;
 }
 
 @keyframes title-pop {
