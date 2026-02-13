@@ -24,7 +24,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
   }
 
   html {
@@ -33,7 +33,6 @@
     color: #1A1D1E;
     -webkit-text-size-adjust: 100%;
     font-size: 16px;
-    /* Increased for mobile readability */
   }
 
   @media (min-width: 768px) {
@@ -50,17 +49,7 @@
   #root {
     width: 100%;
     position: relative;
-    /* Zoom for Chrome/Safari/Edge */
-    zoom: 0.9;
-
-    /* Transform for Firefox fallback */
-    @supports not (zoom: 0.9) {
-      transform: scale(0.9);
-      transform-origin: top center;
-      width: 111.11%;
-      /* Compensate for scale(0.9) width reduction */
-      left: -5.55%;
-    }
+    /* Removed non-standard zoom that breaks mobile scroll momentum */
   }
 }
 
