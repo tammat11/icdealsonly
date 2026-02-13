@@ -4,6 +4,7 @@ import StatsGrid from './components/StatsGrid';
 import ServicesSection from './components/ServicesSection';
 import ClientsMarquee from './components/ClientsMarquee';
 import ApplicationForm from './components/ApplicationForm';
+import Sidebars from './components/Sidebars';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -67,6 +68,7 @@ function App() {
         <ClientsMarquee />
         <ServicesSection />
         <ApplicationForm />
+        <Sidebars />
       </main>
 
       <footer className="py-8 text-center bg-white border-t border-black/5">
