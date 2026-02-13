@@ -188,7 +188,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
                         {/* ✋ The Cleaning Cloth */}
                         <img
-                            src="rag.png"
+                            src="/rag.png"
                             alt="Cleaning"
                             className="cleaning-hand absolute top-0 right-[-20%] w-40 md:w-64 h-auto pointer-events-none z-[60] opacity-0"
                         />

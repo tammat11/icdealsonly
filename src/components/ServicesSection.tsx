@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
 import {
     Building2,
     Waves,
@@ -129,7 +130,7 @@ const ServicesSection = () => {
 
                         target.style.animationPlayState = 'paused';
                         let startX = e.pageX;
-                        let initialTransform = new WebKitCSSMatrix(window.getComputedStyle(marquee).transform).m41;
+                        let initialTransform = gsap.getProperty(marquee, "x") as number;
 
                         const onMouseMove = (moveE: MouseEvent) => {
                             const deltaX = moveE.pageX - startX;
