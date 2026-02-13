@@ -229,12 +229,12 @@
 /* Cleaner Animation - ZigZag Version Fix */
 @keyframes cleaner-hand {
   0% {
-    transform: translate(150%, 50%) rotate(30deg);
+    transform: translate(150%, -50%) rotate(30deg);
     opacity: 0;
   }
 
   15% {
-    transform: translate(10%, -10px) rotate(0deg);
+    transform: translate(-20%, -50%) rotate(0deg);
     opacity: 1;
   }
 
@@ -242,24 +242,24 @@
   35%,
   45%,
   55% {
-    transform: translate(-30%, 5px) rotate(-10deg);
+    transform: translate(-100%, -45%) rotate(-10deg);
     opacity: 1;
   }
 
   30%,
   40%,
   50% {
-    transform: translate(10%, -10px) rotate(0deg);
+    transform: translate(-20%, -55%) rotate(0deg);
     opacity: 1;
   }
 
   70% {
-    transform: translate(-200%, 100%) rotate(-40deg);
+    transform: translate(-300%, 50%) rotate(-40deg);
     opacity: 0;
   }
 
   100% {
-    transform: translate(-200%, 100%) rotate(-40deg);
+    transform: translate(-300%, 50%) rotate(-40deg);
     opacity: 0;
   }
 }
@@ -273,12 +273,13 @@
     filter: blur(0);
   }
 
-  55% {
-    opacity: 0;
-    transform: scale(1.1);
-    filter: blur(20px);
+  52% {
+    opacity: 0.2;
+    transform: scale(1.05);
+    filter: blur(10px);
   }
 
+  60%,
   100% {
     opacity: 0;
     transform: scale(1.1);
@@ -289,19 +290,19 @@
 @keyframes cleaner-sparkle {
 
   0%,
-  55% {
+  60% {
     transform: scale(0) rotate(-45deg);
     opacity: 0;
   }
 
-  65% {
-    transform: scale(1.5) rotate(45deg);
+  70% {
+    transform: scale(1.8) rotate(45deg);
     opacity: 1;
   }
 
-  75%,
+  85%,
   100% {
-    transform: scale(0) rotate(90deg);
+    transform: scale(0) rotate(180deg);
     opacity: 0;
   }
 }
