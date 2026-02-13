@@ -90,7 +90,7 @@ const ServicesSection = () => {
                 </div>
 
                 {/* Main 4 Vertical Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
                     {mainServices.map((service, index) => (
                         <div
                             key={service.id}
@@ -104,17 +104,17 @@ const ServicesSection = () => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            <div className="absolute top-6 left-5 right-5">
-                                <h3 className="text-xl font-bold text-white uppercase leading-[0.9] drop-shadow-lg">
+                            <div className="absolute top-4 left-3 right-3 md:top-6 md:left-5 md:right-5">
+                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[0.9] drop-shadow-lg">
                                     {service.title}
                                 </h3>
                             </div>
 
-                            <div className="absolute bottom-6 left-5 right-5 flex justify-between items-end">
-                                <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
-                                    {service.icon}
+                            <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-5 md:right-5 flex justify-between items-end">
+                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
+                                    <div className="scale-75 md:scale-100">{service.icon}</div>
                                 </div>
-                                <span className="text-brand-green text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
+                                <span className="text-brand-green text-xl md:text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
                             </div>
                         </div>
                     ))}
