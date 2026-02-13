@@ -69,10 +69,10 @@ const ServicesSection = () => {
                 }
                 @keyframes marquee-scroll {
                     0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
+                    100% { transform: translateX(-33.333%); }
                 }
                 .animate-marquee-slow {
-                    animation: marquee-scroll 50s linear infinite;
+                    animation: marquee-scroll 100s linear infinite;
                 }
                 .animate-marquee-slow:hover {
                     animation-play-state: paused;
@@ -121,58 +121,75 @@ const ServicesSection = () => {
                 </div>
             </div>
 
-            {/* Bottom Scrollable Section for secondary cards */}
             <div className={`relative border-t border-black/5 pt-10 service-fade-in ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '500ms' }}>
                 <div className="mb-6 px-6 max-w-7xl mx-auto flex justify-between items-end">
                     <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
                     <div className="hidden md:flex gap-2">
-                        {/* Indicating scrollability */}
-                        <div className="text-[9px] font-bold uppercase tracking-widest text-brand-dark/30">Скролл &rarr;</div>
+                        <div className="text-[9px] font-bold uppercase tracking-widest text-brand-dark/30">Листайте зажав мышкой &rarr;</div>
                     </div>
                 </div>
 
                 <div
-                    className="overflow-x-auto flex gap-3 px-6 pb-8 snap-x snap-mandatory scrollbar-hide"
-                    style={{
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                        WebkitOverflowScrolling: 'touch'
+                    className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
+                    onMouseDown={(e) => {
+                        const target = e.currentTarget;
+                        const marquee = target.querySelector('.marquee-wrapper') as HTMLElement;
+                        if (!marquee) return;
+
+                        target.style.animationPlayState = 'paused';
+                        let startX = e.pageX;
+                        let initialTransform = new WebKitCSSMatrix(window.getComputedStyle(marquee).transform).m41;
+
+                        const onMouseMove = (moveE: MouseEvent) => {
+                            const deltaX = moveE.pageX - startX;
+                            marquee.style.transform = `translateX(${initialTransform + deltaX}px)`;
+                            marquee.style.animation = 'none';
+                        };
+
+                        const onMouseUp = () => {
+                            window.removeEventListener('mousemove', onMouseMove);
+                            window.removeEventListener('mouseup', onMouseUp);
+                            marquee.style.animation = '';
+                            target.style.animationPlayState = '';
+                        };
+
+                        window.addEventListener('mousemove', onMouseMove);
+                        window.addEventListener('mouseup', onMouseUp);
                     }}
                 >
-                    <style>{`
-                        .scrollbar-hide::-webkit-scrollbar {
-                            display: none;
-                        }
-                    `}</style>
-                    {otherServices.map((service) => (
-                        <div
-                            key={service.id}
-                            className="snap-center flex-shrink-0 w-[240px] md:w-[280px] h-[320px] md:h-[360px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
-                        >
-                            <img
-                                src={service.image}
-                                alt={service.title}
-                                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                    <div className="marquee-wrapper flex gap-4 animate-marquee-slow py-4">
+                        {/* Render three times for seamless infinite scroll */}
+                        {[1, 2, 3].map((set) => (
+                            <div key={set} className="flex gap-4 min-w-max">
+                                {otherServices.map((service) => (
+                                    <div
+                                        key={`${set}-${service.id}`}
+                                        className="w-[240px] md:w-[280px] h-[320px] md:h-[360px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                                    >
+                                        <img
+                                            src={service.image}
+                                            alt={service.title}
+                                            className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
-                            <div className="absolute top-6 left-5 right-5">
-                                <h4 className="text-lg md:text-xl font-bold text-white uppercase leading-tight drop-shadow-sm">
-                                    {service.title}
-                                </h4>
+                                        <div className="absolute top-6 left-5 right-5">
+                                            <h4 className="text-lg md:text-xl font-bold text-white uppercase leading-tight drop-shadow-sm">
+                                                {service.title}
+                                            </h4>
+                                        </div>
+
+                                        <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
+                                            <div className="text-brand-green">
+                                                {service.icon}
+                                            </div>
+                                            <span className="text-[10px] font-bold text-white/40">{service.id}</span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-
-                            <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
-                                <div className="text-brand-green">
-                                    {service.icon}
-                                </div>
-                                <span className="text-[10px] font-bold text-white/40">{service.id}</span>
-                            </div>
-                        </div>
-                    ))}
-
-                    {/* Spacer for right padding */}
-                    <div className="w-2 flex-shrink-0" />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

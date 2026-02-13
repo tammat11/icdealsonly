@@ -2,18 +2,18 @@ import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 
 const clients = [
+    { name: "Technodom", domain: "technodom.kz" },
+    { name: "Forte Bank", domain: "forte.kz" },
+    { name: "H&M", domain: "hm.com" },
+    { name: "JTI", domain: "jti.com" },
+    { name: "KOTON", domain: "koton.com" },
     { name: "Magnum", domain: "magnum.kz" },
     { name: "Kaspi Bank", domain: "kaspi.kz" },
-    { name: "Forte Bank", domain: "forte.kz" },
-    { name: "Technodom", domain: "technodom.kz" },
-    { name: "H&M", domain: "hm.com" },
     { name: "Bank RBK", domain: "bankrbk.kz" },
     { name: "Home Credit", domain: "homecredit.kz" },
     { name: "Eurasian Bank", domain: "eubank.kz" },
-    { name: "JTI", domain: "jti.com" },
     { name: "Defacto", domain: "defacto.com.tr" },
     { name: "LPP", domain: "lpp.com" },
-    { name: "KOTON", domain: "koton.com" },
     { name: "Air Astana", domain: "airastana.com" },
     { name: "Samsung", domain: "samsung.com" },
 ];
@@ -29,7 +29,7 @@ const ClientsMarquee = () => {
 
         const anim = gsap.to(marquee, {
             x: -totalWidth,
-            duration: 40,
+            duration: 80,
             repeat: -1,
             ease: "none"
         });
