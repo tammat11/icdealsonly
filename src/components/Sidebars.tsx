@@ -4,7 +4,6 @@ import { Instagram, Send, MessageCircle } from 'lucide-react';
 
 const Sidebars = () => {
     const leftRef = useRef<HTMLDivElement>(null);
-    const rightRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -33,33 +32,20 @@ const Sidebars = () => {
     }, []);
 
     return (
-        <>
-            {/* Left Sidebar - Socials */}
-            <div ref={leftRef} className="fixed left-6 bottom-0 z-[100] hidden xl:flex flex-col items-center gap-6 pb-0">
-                <div className="flex flex-col gap-5 sidebar-item">
-                    <a href="https://instagram.com/icgroup.kz" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
-                        <Instagram size={18} />
-                    </a>
-                    <a href="https://t.me/icgroup" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
-                        <Send size={18} />
-                    </a>
-                    <a href="https://wa.me/77010000000" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
-                        <MessageCircle size={18} />
-                    </a>
-                </div>
-                <div className="w-[1px] bg-brand-dark/10 sidebar-line" />
+        <div ref={leftRef} className="fixed left-6 bottom-0 z-[100] hidden xl:flex flex-col items-center gap-6 pb-0">
+            <div className="flex flex-col gap-5 sidebar-item">
+                <a href="https://instagram.com/icgroup.kz" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
+                    <Instagram size={18} />
+                </a>
+                <a href="https://t.me/icgroup" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
+                    <Send size={18} />
+                </a>
+                <a href="https://wa.me/77010000000" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
+                    <MessageCircle size={18} />
+                </a>
             </div>
-
-            {/* Right Sidebar - Vertical Text */}
-            <div ref={rightRef} className="fixed right-6 bottom-0 z-[100] hidden xl:flex flex-col items-center gap-6 pb-0">
-                <div className="sidebar-item rotate-90 origin-center translate-y-[-60px] whitespace-nowrap">
-                    <a href="tel:+77010333333" className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
-                        +7 (701) 033-33-33
-                    </a>
-                </div>
-                <div className="w-[1px] bg-brand-dark/10 sidebar-line" />
-            </div>
-        </>
+            <div className="w-[1px] bg-brand-dark/10 sidebar-line" />
+        </div>
     );
 };
 

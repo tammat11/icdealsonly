@@ -101,24 +101,18 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 <div className="hero-blob absolute bottom-[10%] right-[10%] w-[35vw] h-[35vw] bg-blue-900/[0.03] rounded-full blur-[120px]" />
                 <div className="hero-blob absolute top-[40%] right-[15%] w-[20vw] h-[20vw] bg-brand-green/[0.03] rounded-full blur-[80px]" />
 
-                {/* Subtle Grid Pattern */}
-                <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`, backgroundSize: '32px 32px' }} />
-
-                {/* Noise Texture */}
-                <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
-
                 {/* 🫧 Bubbles Particles 🫧 */}
                 <div className="absolute inset-0 overflow-hidden">
-                    {[...Array(12)].map((_, i) => (
+                    {[...Array(14)].map((_, i) => (
                         <div
                             key={i}
-                            className="hero-bubble absolute rounded-full bg-brand-green/10 border border-brand-green/20 backdrop-blur-[2px]"
+                            className="hero-bubble absolute rounded-full bg-white/40 border border-brand-green/30 backdrop-blur-[6px] shadow-[0_8px_32px_0_rgba(162,192,55,0.1)]"
                             style={{
-                                width: Math.random() * 40 + 20 + 'px',
-                                height: Math.random() * 40 + 20 + 'px',
+                                width: Math.random() * 60 + 30 + 'px',
+                                height: Math.random() * 60 + 30 + 'px',
                                 left: Math.random() * 100 + '%',
                                 top: Math.random() * 100 + '%',
-                                opacity: 0.2
+                                opacity: 0.4
                             }}
                         />
                     ))}
@@ -130,7 +124,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
             <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
                 <div className="hero-fade-in mb-8">
-                    <img src="/logo-center.png" alt="IC GROUP" className="h-28 md:h-36 w-auto object-contain" />
+                    <img src="/logo-center-back.png" alt="IC GROUP" className="h-28 md:h-36 w-auto object-contain" />
                 </div>
 
                 {/* Ultra-tight Minimalist Heading */}
