@@ -10,12 +10,12 @@ const StatsGrid = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const stats = [
-        { value: "3000", suffix: "+", label: "СОТРУДНИКОВ В\nХОЛДИНГЕ", icon: <Users className="w-6 h-6" /> },
-        { value: "12", suffix: "", label: "ЛЕТ НА РЫНКЕ\nКАЗАХСТАНА", icon: <Calendar className="w-6 h-6" /> },
-        { value: "1", suffix: "M+", label: "M² В ЕЖЕДНЕВНОМ\nУПРАВЛЕНИИ", icon: <Maximize className="w-6 h-6" /> },
-        { value: "40", suffix: "%", label: "ДОЛЯ РЫНКА В\nСЕГМЕНТЕ B2B", icon: <PieChart className="w-6 h-6" /> },
+        { value: "5000", suffix: "+", label: "СОТРУДНИКОВ В\nХОЛДИНГЕ", icon: <Users className="w-6 h-6" /> },
+        { value: "19", suffix: "", label: "ЛЕТ НА РЫНКЕ\nКАЗАХСТАНА", icon: <Calendar className="w-6 h-6" /> },
+        { value: "4.5", suffix: "M+", label: "M² В ЕЖЕДНЕВНОМ\nУПРАВЛЕНИИ", icon: <Maximize className="w-6 h-6" /> },
+        { value: "27", suffix: "%", label: "ДОЛЯ РЫНКА В\nСЕГМЕНТЕ B2B", icon: <PieChart className="w-6 h-6" /> },
         { value: "500", suffix: "+", label: "ЕДИНИЦ\nСПЕЦТЕХНИКИ", icon: <Truck className="w-6 h-6" /> },
-        { value: "250", suffix: "+", label: "КОРПОРАТИВНЫХ\nКЛИЕНТОВ", icon: <Briefcase className="w-6 h-6" /> },
+        { value: "500", suffix: "+", label: "КОРПОРАТИВНЫХ\nКЛИЕНТОВ", icon: <Briefcase className="w-6 h-6" /> },
     ];
 
     useEffect(() => {

@@ -122,8 +122,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
                 <div className="hero-fade-in max-w-2xl mb-14">
                     <p className="text-lg md:text-xl font-semibold text-brand-dark/50 tracking-tight leading-tight">
-                        Профессиональный клининг недвижимости. <br />
-                        Стандарты качества №1 для крупнейших объектов в Казахстане.
+                        Лидер профессионального клиннинга в Казахстане. <br />
                     </p>
                 </div>
 
@@ -133,19 +132,10 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                         className="group relative px-12 py-6 overflow-hidden rounded-full transition-all duration-700 hover:scale-105 active:scale-95"
                     >
                         <div className="absolute inset-0 bg-brand-dark group-hover:bg-brand-green transition-colors duration-700" />
-                        <span className="relative z-10 text-white text-xs font-bold uppercase tracking-[0.3em]">Начать трансформацию</span>
+                        <span className="relative z-10 text-white text-xs font-bold uppercase tracking-[0.3em]">Оставить заявку</span>
                     </button>
 
-                    <div className="hero-fade-in flex items-center gap-10 opacity-30 group">
-                        <div className="flex flex-col items-end">
-                            <span className="text-[9px] font-semibold uppercase tracking-widest text-brand-dark">Larion Lyan</span>
-                            <span className="text-[7px] font-medium text-brand-dark/50 uppercase tracking-widest">Founder IC Group</span>
-                        </div>
-                        <div className="w-[1px] h-8 bg-brand-dark/20" />
-                        <div className="text-[14px] font-semibold uppercase tracking-[0.2em] text-brand-dark">
-                            #1 KZ
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </section>
