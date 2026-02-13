@@ -17,6 +17,9 @@ import {
 
 const ServicesSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const marqueeRef = useRef<HTMLDivElement>(null);
+    const isDragging = useRef(false);
+    const xPos = useRef(0);
 
     const mainServices = [
         { id: "01", title: "Базовая уборка", icon: <Droplets className="w-6 h-6" />, image: "/basic-cleaning.png" },
@@ -66,25 +69,37 @@ const ServicesSection = () => {
                     }
                 }
             );
+
+            // Ticker-based Infinite Marquee
+            if (marqueeRef.current) {
+                const marquee = marqueeRef.current;
+
+                const tick = () => {
+                    if (isDragging.current || !marquee) return;
+
+                    const totalWidth = marquee.scrollWidth / 3;
+                    if (xPos.current === 0) xPos.current = -totalWidth;
+
+                    xPos.current -= 0.8; // Speed
+                    if (xPos.current <= -totalWidth * 2) {
+                        xPos.current += totalWidth;
+                    }
+                    gsap.set(marquee, { x: xPos.current });
+                };
+
+                gsap.ticker.add(tick);
+                return () => gsap.ticker.remove(tick);
+            }
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
+
     return (
         <section ref={sectionRef} className="py-10 bg-white overflow-hidden" id="services">
             <style>{`
                 .service-reveal {
                     transform: translateY(40px);
-                }
-                @keyframes marquee-scroll {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-33.333%); }
-                }
-                .animate-marquee-slow {
-                    animation: marquee-scroll 40s linear infinite;
-                }
-                .animate-marquee-slow:hover {
-                    animation-play-state: paused;
                 }
             `}</style>
 
@@ -140,33 +155,34 @@ const ServicesSection = () => {
                 <div
                     className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
                     onMouseDown={(e) => {
-                        const target = e.currentTarget;
-                        const marquee = target.querySelector('.marquee-wrapper') as HTMLElement;
-                        if (!marquee) return;
+                        if (!marqueeRef.current) return;
 
-                        target.style.animationPlayState = 'paused';
+                        isDragging.current = true;
                         let startX = e.pageX;
-                        let initialTransform = gsap.getProperty(marquee, "x") as number;
+                        let initialX = xPos.current;
 
                         const onMouseMove = (moveE: MouseEvent) => {
                             const deltaX = moveE.pageX - startX;
-                            marquee.style.transform = `translateX(${initialTransform + deltaX}px)`;
-                            marquee.style.animation = 'none';
+                            xPos.current = initialX + deltaX;
+
+                            const totalWidth = marqueeRef.current!.scrollWidth / 3;
+                            if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
+                            if (xPos.current >= 0) xPos.current -= totalWidth;
+
+                            gsap.set(marqueeRef.current, { x: xPos.current });
                         };
 
                         const onMouseUp = () => {
                             window.removeEventListener('mousemove', onMouseMove);
                             window.removeEventListener('mouseup', onMouseUp);
-                            marquee.style.animation = '';
-                            target.style.animationPlayState = '';
+                            isDragging.current = false;
                         };
 
                         window.addEventListener('mousemove', onMouseMove);
                         window.addEventListener('mouseup', onMouseUp);
                     }}
                 >
-                    <div className="marquee-wrapper flex gap-4 animate-marquee-slow py-4">
-                        {/* Render three times for seamless infinite scroll */}
+                    <div ref={marqueeRef} className="flex gap-4 py-4">
                         {[1, 2, 3].map((set) => (
                             <div key={set} className="flex gap-4 min-w-max">
                                 {otherServices.map((service) => (
