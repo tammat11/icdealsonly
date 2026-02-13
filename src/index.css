@@ -114,9 +114,19 @@
     @apply py-6 md:py-10;
   }
 
-  .section-header {
-    @apply font-bold uppercase not-italic leading-[0.8] tracking-tighter text-brand-dark;
-    font-size: clamp(32px, 6vw, 70px);
+  h1 {
+    @apply font-black uppercase leading-[0.8] tracking-tighter text-brand-dark;
+    font-size: clamp(48px, 10vw, 110px);
+  }
+
+  h2 {
+    @apply font-black uppercase leading-[0.9] tracking-tighter text-brand-dark;
+    font-size: clamp(28px, 5vw, 42px);
+  }
+
+  h3 {
+    @apply font-bold uppercase leading-tight tracking-tight text-brand-dark;
+    font-size: clamp(18px, 3vw, 24px);
   }
 
   .section-tag {

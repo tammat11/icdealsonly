@@ -61,13 +61,12 @@ const StatsGrid = () => {
         <section ref={sectionRef} className="section-padding-compact bg-white relative overflow-hidden" id="stats">
             <div className="max-w-7xl mx-auto px-6 relative z-10" ref={containerRef}>
 
-                {/* Header */}
                 <div className="mb-4 md:mb-6 text-center">
                     <div className="section-tag">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
-                        <span>Market Leadership</span>
+                        <span>Наш масштаб</span>
                     </div>
-                    <h2 className="section-header text-brand-dark">
+                    <h2 className="text-brand-dark">
                         ЦИФРЫ <span className="text-brand-green">IC GROUP</span>
                     </h2>
                 </div>

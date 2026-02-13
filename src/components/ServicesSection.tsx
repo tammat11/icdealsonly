@@ -56,12 +56,12 @@ const ServicesSection = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} className="py-16 bg-white overflow-hidden" id="services">
+        <section ref={sectionRef} className="py-10 bg-white overflow-hidden" id="services">
             <style>{`
                 .service-fade-in {
                     opacity: 0;
-                    transform: translateY(30px);
-                    transition: opacity 1s ease-out, transform 1s ease-out;
+                    transform: translateY(20px);
+                    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
                 }
                 .service-fade-in.visible {
                     opacity: 1;
@@ -80,23 +80,21 @@ const ServicesSection = () => {
             `}</style>
 
             <div className="max-w-7xl mx-auto px-6">
-                <div className={`mb-16 text-center flex flex-col items-center service-fade-in ${isVisible ? 'visible' : ''}`}>
-                    <div className="section-tag mb-4">
-                        <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
-                        <span>НАШИ УСЛУГИ</span>
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tighter uppercase leading-[0.8]">
-                        Создаем чистоту <br />
-                        <span className="text-brand-green">по всему казахстану</span>
+                <div className={`mb-10 text-center flex flex-col items-center service-fade-in ${isVisible ? 'visible' : ''}`}>
+                    <h2 className="mb-2">
+                        НАШИ УСЛУГИ
                     </h2>
+                    <p className="text-[10px] md:text-xs font-bold text-brand-green uppercase tracking-[0.3em]">
+                        Создаем чистоту по всему казахстану
+                    </p>
                 </div>
 
                 {/* Main 4 Vertical Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
                     {mainServices.map((service, index) => (
                         <div
                             key={service.id}
-                            className={`group relative h-[400px] md:h-[500px] overflow-hidden rounded-[24px] cursor-pointer shadow-md hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 service-fade-in ${isVisible ? 'visible' : ''}`}
+                            className={`group relative h-[300px] md:h-[400px] overflow-hidden rounded-[20px] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-700 hover:-translate-y-1 service-fade-in ${isVisible ? 'visible' : ''}`}
                             style={{ transitionDelay: `${index * 100}ms` }}
                         >
                             <img
@@ -104,19 +102,19 @@ const ServicesSection = () => {
                                 alt={service.title}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            <div className="absolute top-8 left-6 right-6">
-                                <h3 className="text-2xl font-bold text-white uppercase leading-[0.9] drop-shadow-lg">
+                            <div className="absolute top-6 left-5 right-5">
+                                <h3 className="text-xl font-bold text-white uppercase leading-[0.9] drop-shadow-lg">
                                     {service.title}
                                 </h3>
                             </div>
 
-                            <div className="absolute bottom-8 left-6 right-6 flex justify-between items-end">
-                                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
+                            <div className="absolute bottom-6 left-5 right-5 flex justify-between items-end">
+                                <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
                                     {service.icon}
                                 </div>
-                                <span className="text-brand-green text-3xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
+                                <span className="text-brand-green text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
                             </div>
                         </div>
                     ))}
@@ -124,17 +122,17 @@ const ServicesSection = () => {
             </div>
 
             {/* Bottom Marquee for secondary cards */}
-            <div className={`relative border-t border-black/5 pt-12 service-fade-in ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '500ms' }}>
+            <div className={`relative border-t border-black/5 pt-10 service-fade-in ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '500ms' }}>
                 <div className="mb-6 px-6 max-w-7xl mx-auto">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительные услуги</p>
+                    <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
                 </div>
 
                 <div className="overflow-hidden flex">
-                    <div className="flex gap-4 animate-marquee-slow py-4">
+                    <div className="flex gap-3 animate-marquee-slow py-2">
                         {infiniteOthers.map((service, i) => (
                             <div
                                 key={`${service.id}-${i}`}
-                                className="flex-shrink-0 w-[200px] md:w-[240px] h-[280px] md:h-[320px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                                className="flex-shrink-0 w-[180px] md:w-[220px] h-[240px] md:h-[280px] relative rounded-[16px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-500"
                             >
                                 <img
                                     src={service.image}
