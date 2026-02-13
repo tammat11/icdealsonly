@@ -20,6 +20,7 @@ const ServicesSection = () => {
     const marqueeRef = useRef<HTMLDivElement>(null);
     const isDragging = useRef(false);
     const xPos = useRef(0);
+    const velocity = useRef(0);
 
     const mainServices = [
         { id: "01", title: "Базовая уборка", icon: <Droplets className="w-6 h-6" />, image: "/basic-cleaning.png" },
@@ -75,17 +76,25 @@ const ServicesSection = () => {
                 const marquee = marqueeRef.current;
 
                 const tick = () => {
-                    if (isDragging.current || !marquee) return;
+                    if (!marquee) return;
 
                     const totalWidth = marquee.scrollWidth / 3;
                     if (totalWidth <= 0) return;
 
                     if (xPos.current === 0) xPos.current = -totalWidth;
 
-                    xPos.current -= 1.0; // Slightly faster
-                    if (xPos.current <= -totalWidth * 2) {
-                        xPos.current += totalWidth;
+                    if (!isDragging.current) {
+                        // Momentum + Smooth transition back to auto-scroll
+                        xPos.current += velocity.current;
+
+                        // Revert back to auto-speed smoothly
+                        const targetSpeed = -1.0;
+                        velocity.current += (targetSpeed - velocity.current) * 0.05;
                     }
+
+                    if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
+                    if (xPos.current >= 0) xPos.current -= totalWidth;
+
                     gsap.set(marquee, { x: xPos.current });
                 };
 
@@ -156,6 +165,7 @@ const ServicesSection = () => {
 
                 <div
                     className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y"
+                    style={{ willChange: 'transform' }}
                     onMouseDown={(e) => {
                         if (!marqueeRef.current) return;
                         isDragging.current = true;
@@ -163,11 +173,21 @@ const ServicesSection = () => {
                         let initialX = xPos.current;
 
                         const onMouseMove = (moveE: MouseEvent) => {
+                            const prevX = xPos.current;
                             const deltaX = moveE.pageX - startX;
                             xPos.current = initialX + deltaX;
+
+                            velocity.current = xPos.current - prevX;
+
                             const totalWidth = marqueeRef.current!.scrollWidth / 3;
-                            if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
-                            if (xPos.current >= 0) xPos.current -= totalWidth;
+                            if (xPos.current <= -totalWidth * 2) {
+                                xPos.current += totalWidth;
+                                initialX += totalWidth;
+                            }
+                            if (xPos.current >= 0) {
+                                xPos.current -= totalWidth;
+                                initialX -= totalWidth;
+                            }
                             gsap.set(marqueeRef.current, { x: xPos.current });
                         };
 
@@ -187,11 +207,21 @@ const ServicesSection = () => {
                         let initialX = xPos.current;
 
                         const onTouchMove = (moveE: TouchEvent) => {
+                            const prevX = xPos.current;
                             const deltaX = moveE.touches[0].pageX - startX;
                             xPos.current = initialX + deltaX;
+
+                            velocity.current = xPos.current - prevX;
+
                             const totalWidth = marqueeRef.current!.scrollWidth / 3;
-                            if (xPos.current <= -totalWidth * 2) xPos.current += totalWidth;
-                            if (xPos.current >= 0) xPos.current -= totalWidth;
+                            if (xPos.current <= -totalWidth * 2) {
+                                xPos.current += totalWidth;
+                                initialX += totalWidth;
+                            }
+                            if (xPos.current >= 0) {
+                                xPos.current -= totalWidth;
+                                initialX -= totalWidth;
+                            }
                             gsap.set(marqueeRef.current, { x: xPos.current });
                         };
 
