@@ -29,7 +29,7 @@ const ApplicationForm = () => {
             <div className="max-w-4xl mx-auto px-6">
                 <div className="bg-brand-dark text-white p-8 md:p-16 rounded-[40px] relative overflow-hidden shadow-2xl form-reveal">
                     <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/20 rounded-full blur-[120px]" />
-                    
+
                     <div className="relative z-10">
                         <div className="mb-12">
                             <h2 className="text-4xl md:text-5xl font-bold mb-4 uppercase tracking-tighter">Оставить заявку</h2>
@@ -39,34 +39,34 @@ const ApplicationForm = () => {
                         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">Ваше имя</label>
-                                <input 
-                                    type="text" 
-                                    placeholder="Иван Иванов" 
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10" 
+                                <input
+                                    type="text"
+                                    placeholder="Иван Иванов"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10"
                                 />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">Телефон</label>
-                                <input 
-                                    type="tel" 
-                                    placeholder="+7 (___) ___-__-__" 
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10" 
+                                <input
+                                    type="tel"
+                                    placeholder="+7 (___) ___-__-__"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10"
                                 />
                             </div>
                             <div className="space-y-2 md:col-span-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">Email</label>
-                                <input 
-                                    type="email" 
-                                    placeholder="example@mail.com" 
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10" 
+                                <input
+                                    type="email"
+                                    placeholder="example@mail.com"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10"
                                 />
                             </div>
                             <div className="space-y-2 md:col-span-2">
                                 <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">О проекте</label>
-                                <textarea 
-                                    placeholder="Расскажите о ваших задачах..." 
-                                    rows={4} 
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10 resize-none" 
+                                <textarea
+                                    placeholder="Расскажите о ваших задачах..."
+                                    rows={4}
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10 resize-none"
                                 />
                             </div>
                             <div className="md:col-span-2 mt-4">
