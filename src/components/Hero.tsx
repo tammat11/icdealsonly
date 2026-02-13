@@ -46,6 +46,12 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 stagger: {
                     each: 0.2,
                     from: "random"
+                },
+                scrollTrigger: {
+                    trigger: root.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    toggleActions: "play pause resume pause"
                 }
             });
 
@@ -57,7 +63,13 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 duration: "random(10, 20)",
                 repeat: -1,
                 yoyo: true,
-                ease: "sine.inOut"
+                ease: "sine.inOut",
+                scrollTrigger: {
+                    trigger: root.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    toggleActions: "play pause resume pause"
+                }
             });
 
             // ✨ CLEANING ANIMATION ✨
@@ -97,16 +109,16 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
             {/* --- Premium Background Layer --- */}
             <div className="absolute inset-0 pointer-events-none">
                 {/* Mesh Gradient / Blobs */}
-                <div className="hero-blob absolute top-[10%] left-[10%] w-[40vw] h-[40vw] bg-brand-green/5 rounded-full blur-[80px] will-change-transform" />
-                <div className="hero-blob absolute bottom-[10%] right-[10%] w-[35vw] h-[35vw] bg-blue-900/[0.03] rounded-full blur-[80px] will-change-transform" />
-                <div className="hero-blob absolute top-[40%] right-[15%] w-[20vw] h-[20vw] bg-brand-green/[0.03] rounded-full blur-[60px] will-change-transform" />
+                <div className="hero-blob absolute top-[10%] left-[10%] w-[40vw] h-[40vw] bg-brand-green/5 rounded-full blur-[40px] md:blur-[80px] will-change-transform" />
+                <div className="hero-blob absolute bottom-[10%] right-[10%] w-[35vw] h-[35vw] bg-blue-900/[0.03] rounded-full blur-[40px] md:blur-[80px] will-change-transform" />
+                <div className="hero-blob absolute top-[40%] right-[15%] w-[20vw] h-[20vw] bg-brand-green/[0.03] rounded-full blur-[30px] md:blur-[60px] will-change-transform" />
 
                 {/* 🫧 Bubbles Particles 🫧 */}
                 <div className="absolute inset-0 overflow-hidden">
                     {[...Array(8)].map((_, i) => (
                         <div
                             key={i}
-                            className="hero-bubble absolute rounded-full bg-white/40 border border-brand-green/30 backdrop-blur-[6px] shadow-[0_8px_32px_0_rgba(162,192,55,0.1)] will-change-transform"
+                            className={`hero-bubble absolute rounded-full bg-white/40 border border-brand-green/30 ${i > 4 ? 'hidden md:block' : ''} md:backdrop-blur-[6px] md:shadow-[0_8px_32px_0_rgba(162,192,55,0.1)] will-change-transform`}
                             style={{
                                 width: Math.random() * 60 + 30 + 'px',
                                 height: Math.random() * 60 + 30 + 'px',

@@ -1,5 +1,8 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const clients = [
     { name: "Technodom", domain: "technodom.kz", logo: "/technodom-logo.png" },
@@ -31,7 +34,13 @@ const ClientsMarquee = () => {
             x: -totalWidth,
             duration: 40,
             repeat: -1,
-            ease: "none"
+            ease: "none",
+            scrollTrigger: {
+                trigger: marquee,
+                start: "top bottom",
+                end: "bottom top",
+                toggleActions: "play pause resume pause"
+            }
         });
 
         return () => {

@@ -74,9 +74,17 @@ const ServicesSection = () => {
             // Ticker-based Infinite Marquee
             if (marqueeRef.current) {
                 const marquee = marqueeRef.current;
+                let isInView = false;
+
+                ScrollTrigger.create({
+                    trigger: marquee,
+                    start: "top bottom",
+                    end: "bottom top",
+                    onToggle: (self) => isInView = self.isActive
+                });
 
                 const tick = () => {
-                    if (!marquee) return;
+                    if (!marquee || !isInView) return;
 
                     const totalWidth = marquee.scrollWidth / 3;
                     if (totalWidth <= 0) return;

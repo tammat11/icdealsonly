@@ -15,9 +15,6 @@ function App() {
   const mainRef = useRef(null);
 
   useEffect(() => {
-    // Enable better mobile scroll handling
-    ScrollTrigger.normalizeScroll(true);
-
     const refreshTrigger = () => {
       ScrollTrigger.refresh();
     };
@@ -59,7 +56,6 @@ function App() {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.normalizeScroll(false);
       window.removeEventListener('load', refreshTrigger);
       window.removeEventListener('resize', handleResize);
     };
