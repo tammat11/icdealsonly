@@ -120,8 +120,8 @@
   }
 
   h2 {
-    @apply font-black uppercase leading-[0.9] tracking-tighter text-brand-dark;
-    font-size: clamp(28px, 5vw, 42px);
+    @apply font-extrabold uppercase leading-[0.9] tracking-tighter text-brand-dark;
+    font-size: clamp(36px, 6vw, 56px);
   }
 
   h3 {
