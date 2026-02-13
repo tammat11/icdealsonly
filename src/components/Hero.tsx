@@ -106,7 +106,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
     }, []);
 
     return (
-        <section ref={root} className="relative min-h-[100svh] flex flex-col items-center justify-center pt-20 pb-12 px-6 overflow-hidden bg-white">
+        <section ref={root} className="relative h-[100svh] flex flex-col items-center justify-center pt-16 pb-12 px-6 overflow-hidden bg-white">
 
             {/* --- Premium Background Layer --- */}
             <div className="absolute inset-0 pointer-events-none">
@@ -137,8 +137,8 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
             <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
-                <div className="hero-fade-in mb-8">
-                    <img src="/logo-center-back.png" alt="IC GROUP" className="h-28 md:h-36 w-auto object-contain" />
+                <div className="hero-fade-in mb-6">
+                    <img src="/logo-center-back.png" alt="IC GROUP" className="h-20 md:h-36 w-auto object-contain" />
                 </div>
 
                 {/* Ultra-tight Minimalist Heading */}
