@@ -49,30 +49,29 @@ const ServicesSection = () => {
     ];
 
     const otherServices = [
-        { id: "05", title: "Мойка витражей и светильников", icon: <Waves className="w-5 h-5" /> },
-        { id: "06", title: "Высотные работы", icon: <Building2 className="w-5 h-5" /> },
-        { id: "07", title: "Флористы и садовники", icon: <Flower2 className="w-5 h-5" /> },
-        { id: "08", title: "Обработка от насекомых и грызунов", icon: <Bug className="w-5 h-5" /> },
-        { id: "09", title: "Инженерные услуги", icon: <Wrench className="w-5 h-5" /> },
-        { id: "10", title: "Уборка снега", icon: <Snowflake className="w-5 h-5" /> },
-        { id: "11", title: "Кофеледи", icon: <Coffee className="w-5 h-5" /> },
-        { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" /> },
+        { id: "05", title: "Мойка витражей", icon: <Waves className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=400" },
+        { id: "06", title: "Высотные работы", icon: <Building2 className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" },
+        { id: "07", title: "Флористы", icon: <Flower2 className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1558036117-15d82a90bd36?auto=format&fit=crop&q=80&w=400" },
+        { id: "08", title: "Дезинсекция", icon: <Bug className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1584622741082-ef8ec202404e?auto=format&fit=crop&q=80&w=400" },
+        { id: "09", title: "Инженерия", icon: <Wrench className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=400" },
+        { id: "10", title: "Уборка снега", icon: <Snowflake className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1517210122415-b0c70b2a09bf?auto=format&fit=crop&q=80&w=400" },
+        { id: "11", title: "Кофеледи", icon: <Coffee className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400" },
+        { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1517677208171-4bc6725a3e60?auto=format&fit=crop&q=80&w=400" },
     ];
 
-    // Duplicate for infinite marquee
-    const infiniteOthers = [...otherServices, ...otherServices, ...otherServices, ...otherServices];
+    const infiniteOthers = [...otherServices, ...otherServices, ...otherServices];
 
     useEffect(() => {
         const ctx = gsap.context(() => {
             gsap.from(".main-service-card", {
                 y: 50,
                 opacity: 0,
-                duration: 1,
-                stagger: 0.15,
-                ease: "power3.out",
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: ".main-services-grid",
-                    start: "top 85%",
+                    start: "top 80%",
                 }
             });
         }, sectionRef);
@@ -88,7 +87,7 @@ const ServicesSection = () => {
                     100% { transform: translateX(-50%); }
                 }
                 .animate-marquee-slow {
-                    animation: marquee-scroll 40s linear infinite;
+                    animation: marquee-scroll 50s linear infinite;
                 }
                 .animate-marquee-slow:hover {
                     animation-play-state: paused;
@@ -107,43 +106,41 @@ const ServicesSection = () => {
                     </h2>
                 </div>
 
-                {/* Main 4 Grid */}
-                <div className="main-services-grid grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+                {/* Main 4 Vertical Cards */}
+                <div className="main-services-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
                     {mainServices.map((service) => (
                         <div
                             key={service.id}
-                            className="main-service-card group relative h-[300px] md:h-[400px] overflow-hidden rounded-[32px] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500"
+                            className="main-service-card group relative h-[500px] md:h-[600px] overflow-hidden rounded-[24px] cursor-pointer shadow-md hover:shadow-2xl transition-all duration-700 hover:-translate-y-2"
                         >
                             <img
                                 src={service.image}
                                 alt={service.title}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            <div className="absolute top-8 left-8">
-                                <h3 className="text-2xl md:text-3xl font-bold text-white uppercase leading-tight max-w-[200px] drop-shadow-md">
+                            <div className="absolute top-8 left-6 right-6">
+                                <h3 className="text-2xl md:text-3xl font-bold text-white uppercase leading-[0.9] drop-shadow-lg">
                                     {service.title}
                                 </h3>
                             </div>
 
-                            <div className="absolute bottom-8 right-8 flex items-center justify-center">
-                                <span className="text-brand-green text-3xl font-black opacity-30 group-hover:opacity-100 transition-opacity duration-500">{service.id}</span>
-                            </div>
-
-                            {/* Hover Overlay Icon */}
-                            <div className="absolute top-8 right-8 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center translate-y-[-20%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                                {service.icon}
+                            <div className="absolute bottom-8 left-6 right-6 flex justify-between items-end">
+                                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
+                                    {service.icon}
+                                </div>
+                                <span className="text-brand-green text-3xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Bottom Marquee for others */}
-            <div className="relative border-t border-black/5 pt-20">
-                <div className="mb-10 px-6 max-w-7xl mx-auto">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Специализированные услуги</p>
+            {/* Bottom Marquee for secondary cards */}
+            <div className="relative border-t border-black/5 pt-16">
+                <div className="mb-8 px-6 max-w-7xl mx-auto">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительные услуги</p>
                 </div>
 
                 <div className="overflow-hidden flex">
@@ -151,17 +148,27 @@ const ServicesSection = () => {
                         {infiniteOthers.map((service, i) => (
                             <div
                                 key={i}
-                                className="flex-shrink-0 w-[280px] md:w-[320px] bg-white border border-black/5 rounded-2xl p-6 flex items-center justify-between hover:border-brand-green/30 hover:shadow-lg transition-all duration-300 group cursor-pointer"
+                                className="flex-shrink-0 w-[220px] md:w-[260px] h-[300px] md:h-[350px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
                             >
-                                <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-xl bg-brand-green/5 text-brand-green flex items-center justify-center group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
+                                <img
+                                    src={service.image}
+                                    alt={service.title}
+                                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                                <div className="absolute top-6 left-5 right-5">
+                                    <h4 className="text-sm md:text-base font-bold text-white uppercase leading-tight drop-shadow-sm">
+                                        {service.title}
+                                    </h4>
+                                </div>
+
+                                <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
+                                    <div className="text-brand-green">
                                         {service.icon}
                                     </div>
-                                    <span className="text-sm font-bold text-brand-dark leading-tight uppercase max-w-[160px]">
-                                        {service.title}
-                                    </span>
+                                    <span className="text-[10px] font-bold text-white/40">{service.id}</span>
                                 </div>
-                                <span className="text-[10px] font-bold text-brand-dark/20">{service.id}</span>
                             </div>
                         ))}
                     </div>
