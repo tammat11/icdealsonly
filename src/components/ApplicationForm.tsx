@@ -84,11 +84,49 @@ const ApplicationForm = () => {
         }
     };
 
+    const formatPhoneNumber = (value: string) => {
+        const numbers = value.replace(/\D/g, '');
+        if (numbers.length === 0) return '';
+
+        let formatted = '+7';
+
+        // Skip the first digit if it's 7 or 8 (we already have +7)
+        const digits = (numbers.startsWith('7') || numbers.startsWith('8'))
+            ? numbers.slice(1)
+            : numbers;
+
+        const trimmed = digits.slice(0, 10);
+
+        if (trimmed.length > 0) {
+            formatted += ` (${trimmed.slice(0, 3)}`;
+        }
+        if (trimmed.length >= 4) {
+            formatted += `) ${trimmed.slice(3, 6)}`;
+        }
+        if (trimmed.length >= 7) {
+            formatted += `-${trimmed.slice(6, 8)}`;
+        }
+        if (trimmed.length >= 9) {
+            formatted += `-${trimmed.slice(8, 10)}`;
+        }
+
+        return formatted;
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }));
+        const { name, value } = e.target;
+
+        if (name === 'phone') {
+            setFormData(prev => ({
+                ...prev,
+                phone: formatPhoneNumber(value)
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: value
+            }));
+        }
     };
 
     return (
