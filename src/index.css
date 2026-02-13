@@ -329,16 +329,16 @@
 }
 
 .animate-cleaner-hand {
-  animation: cleaner-hand 3.5s ease-in-out 0.5s forwards;
+  animation: cleaner-hand 3s ease-in-out 0.5s forwards;
 }
 
 .animate-cleaner-dirt {
-  animation: cleaner-dirt 3.5s ease-in-out 0.5s forwards;
+  animation: cleaner-dirt 3s ease-in-out 0.5s forwards;
   opacity: 0.6;
 }
 
 .animate-cleaner-sparkle {
-  animation: cleaner-sparkle 3.5s ease-in-out 0.5s forwards;
+  animation: cleaner-sparkle 3s ease-in-out 0.5s forwards;
 }
 
 @keyframes title-pop {

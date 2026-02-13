@@ -55,8 +55,8 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                         {/* 🧼 Cleaning Elements Container (Front layer, shifted far right) */}
                         <div className="absolute top-1/2 right-[-5%] -translate-y-1/2 w-[20%] h-full pointer-events-none z-[70]">
 
-                            {/* 🌫️ The Dirt Spot (Larger) */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 md:w-32 h-24 md:h-32 animate-cleaner-dirt mix-blend-multiply opacity-0">
+                            {/* 🌫️ The Dirt Spot (Medium) */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 md:w-24 h-14 md:h-24 animate-cleaner-dirt mix-blend-multiply opacity-0">
                                 <svg viewBox="0 0 200 200" className="w-full h-full text-[#5c6066] fill-current">
                                     <path d="M41.7,-72.4C53.4,-64.7,62.1,-53.4,68.9,-41.4C75.7,-29.4,80.6,-16.7,81.1,-3.7C81.6,9.3,77.7,22.6,71.2,34.8C64.7,47,55.6,58.1,44.4,66.5C33.2,74.9,19.9,80.6,6.1,80.9C-7.7,81.2,-21.9,76.1,-34.5,68.9C-47.1,61.7,-58.1,52.4,-66.4,41.2C-74.7,30,-80.3,16.9,-81.1,3.4C-81.9,-10.1,-77.9,-24,-69.9,-35.8C-61.9,-47.6,-49.9,-57.3,-37.4,-64.5C-24.9,-71.7,-11.9,-76.4,2.1,-79.8C16.1,-83.2,30,-80.1,41.7,-72.4Z" transform="translate(100 100)" />
                                 </svg>
