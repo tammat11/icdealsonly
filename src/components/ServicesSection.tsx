@@ -1,6 +1,4 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useEffect, useState } from 'react';
 import {
     Building2,
     Waves,
@@ -16,39 +14,15 @@ import {
     Shirt
 } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const ServicesSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
 
-    const mainServices = [
-        {
-            id: "01",
-            title: "Базовая уборка",
-            image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=800",
-            icon: <Droplets className="w-6 h-6" />
-        },
-        {
-            id: "02",
-            title: "Поддерживающая уборка",
-            image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800",
-            icon: <Wind className="w-6 h-6" />
-        },
-        {
-            id: "03",
-            title: "Генеральная уборка",
-            image: "https://images.unsplash.com/photo-1581578731548-c64695ce6952?auto=format&fit=crop&q=80&w=800",
-            icon: <Sparkles className="w-6 h-6" />
-        },
-        {
-            id: "04",
-            title: "Послестроительная уборка",
-            image: "https://images.unsplash.com/photo-1505798577917-a65157d3320a?auto=format&fit=crop&q=80&w=800",
-            icon: <Hammer className="w-6 h-6" />
-        }
-    ];
-
-    const otherServices = [
+    const services = [
+        { id: "01", title: "Базовая уборка", icon: <Droplets className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=600" },
+        { id: "02", title: "Поддерживающая уборка", icon: <Wind className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600" },
+        { id: "03", title: "Генеральная уборка", icon: <Sparkles className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1581578731548-c64695ce6952?auto=format&fit=crop&q=80&w=600" },
+        { id: "04", title: "Послестроительная уборка", icon: <Hammer className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1505798577917-a65157d3320a?auto=format&fit=crop&q=80&w=600" },
         { id: "05", title: "Мойка витражей", icon: <Waves className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=400" },
         { id: "06", title: "Высотные работы", icon: <Building2 className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" },
         { id: "07", title: "Флористы", icon: <Flower2 className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1558036117-15d82a90bd36?auto=format&fit=crop&q=80&w=400" },
@@ -59,124 +33,108 @@ const ServicesSection = () => {
         { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1517677208171-4bc6725a3e60?auto=format&fit=crop&q=80&w=400" },
     ];
 
-    const infiniteOthers = [...otherServices, ...otherServices, ...otherServices];
-
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.from(".main-service-card", {
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".main-services-grid",
-                    start: "top 80%",
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
                 }
-            });
-        }, sectionRef);
+            },
+            { threshold: 0.1 }
+        );
 
-        return () => ctx.revert();
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
     }, []);
 
     return (
         <section ref={sectionRef} className="py-24 bg-white overflow-hidden" id="services">
             <style>{`
-                @keyframes marquee-scroll {
+                .service-fade-in {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                }
+                .service-fade-in.visible {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                @keyframes marquee-horizontal {
                     0% { transform: translateX(0); }
                     100% { transform: translateX(-50%); }
                 }
-                .animate-marquee-slow {
-                    animation: marquee-scroll 50s linear infinite;
+                .animate-marquee-service {
+                    animation: marquee-horizontal 60s linear infinite;
                 }
-                .animate-marquee-slow:hover {
+                .animate-marquee-service:hover {
                     animation-play-state: paused;
                 }
             `}</style>
 
             <div className="max-w-7xl mx-auto px-6">
-                <div className="mb-16">
+                <div className={`mb-16 service-fade-in ${isVisible ? 'visible' : ''}`}>
                     <div className="section-tag mb-4">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
                         <span>Наш сервис</span>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tighter uppercase whitespace-nowrap leading-[0.8]">
-                        Создаем чистоту <br />
-                        <span className="text-brand-green">по всему казахстану</span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark tracking-tighter uppercase whitespace-nowrap leading-[0.8] mb-2">
+                        СОЗДАЕМ ЧИСТОТУ <br />
+                        <span className="text-brand-green">ПО ВСЕМУ КАЗАХСТАНУ</span>
                     </h2>
                 </div>
 
-                {/* Main 4 Vertical Cards */}
-                <div className="main-services-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
-                    {mainServices.map((service) => (
+                {/* Main Grid for all services to ensure they appear */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                    {services.map((service, index) => (
                         <div
                             key={service.id}
-                            className="main-service-card group relative h-[500px] md:h-[600px] overflow-hidden rounded-[24px] cursor-pointer shadow-md hover:shadow-2xl transition-all duration-700 hover:-translate-y-2"
+                            className={`service-card group relative h-[300px] overflow-hidden rounded-[24px] cursor-pointer shadow-sm hover:shadow-xl transition-all duration-700 hover:-translate-y-1 service-fade-in ${isVisible ? 'visible' : ''}`}
+                            style={{ transitionDelay: `${index * 50}ms` }}
                         >
                             <img
                                 src={service.image}
                                 alt={service.title}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
 
-                            <div className="absolute top-8 left-6 right-6">
-                                <h3 className="text-2xl md:text-3xl font-bold text-white uppercase leading-[0.9] drop-shadow-lg">
+                            <div className="absolute top-6 left-5 right-5">
+                                <h3 className="text-lg font-bold text-white uppercase leading-tight drop-shadow-md">
                                     {service.title}
                                 </h3>
                             </div>
 
-                            <div className="absolute bottom-8 left-6 right-6 flex justify-between items-end">
-                                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
+                            <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
+                                <div className="text-brand-green">
                                     {service.icon}
                                 </div>
-                                <span className="text-brand-green text-3xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
+                                <span className="text-brand-green text-xl font-black opacity-30 group-hover:opacity-100 transition-opacity duration-500 leading-none">
+                                    {service.id}
+                                </span>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Bottom Marquee for secondary cards */}
-            <div className="relative border-t border-black/5 pt-16">
-                <div className="mb-8 px-6 max-w-7xl mx-auto">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительные услуги</p>
-                </div>
-
+            {/* Bottom sliding line for additional dynamics if all should scroll too */}
+            <div className="relative border-t border-black/5 pt-12">
                 <div className="overflow-hidden flex">
-                    <div className="flex gap-4 animate-marquee-slow py-4">
-                        {infiniteOthers.map((service, i) => (
+                    <div className="flex gap-4 animate-marquee-service py-4">
+                        {[...services, ...services].map((service, i) => (
                             <div
-                                key={i}
-                                className="flex-shrink-0 w-[220px] md:w-[260px] h-[300px] md:h-[350px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                                key={`${service.id}-${i}`}
+                                className="flex-shrink-0 px-8 py-3 bg-brand-light/50 border border-black/5 rounded-full flex items-center gap-3"
                             >
-                                <img
-                                    src={service.image}
-                                    alt={service.title}
-                                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                                <div className="absolute top-6 left-5 right-5">
-                                    <h4 className="text-sm md:text-base font-bold text-white uppercase leading-tight drop-shadow-sm">
-                                        {service.title}
-                                    </h4>
-                                </div>
-
-                                <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
-                                    <div className="text-brand-green">
-                                        {service.icon}
-                                    </div>
-                                    <span className="text-[10px] font-bold text-white/40">{service.id}</span>
-                                </div>
+                                <span className="text-brand-green font-bold text-xs">{service.id}</span>
+                                <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-dark/60">{service.title}</span>
                             </div>
                         ))}
                     </div>
                 </div>
-
-                {/* Gradient Masks */}
-                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
             </div>
         </section>
     );
