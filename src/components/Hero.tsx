@@ -132,7 +132,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                         className="group relative px-12 py-6 overflow-hidden rounded-full transition-all duration-700 hover:scale-105 active:scale-95"
                     >
                         <div className="absolute inset-0 bg-brand-dark group-hover:bg-brand-green transition-colors duration-700" />
-                        <span className="relative z-10 text-white text-xs font-bold uppercase tracking-[0.3em]" style={{ color: 'white' }}>Оставить заявку</span>
+                        <span className="relative z-10 text-white text-xs font-bold uppercase tracking-[0.3em] text-white" style={{ color: 'white' }}>Оставить заявку</span>
                     </button>
 
 
