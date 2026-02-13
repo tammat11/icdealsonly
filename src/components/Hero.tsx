@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// No imports from lucide-react needed
+import { ShieldCheck, Award, Clock, Users } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,28 +34,49 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 }
             );
 
-            // ✨ NEW CLEANING ANIMATION ✨
+            // Floating Badges Animation
+            gsap.to(".floating-badge", {
+                y: "random(-15, 15)",
+                x: "random(-10, 10)",
+                rotate: "random(-2, 2)",
+                duration: "random(2, 4)",
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                stagger: {
+                    each: 0.5,
+                    from: "random"
+                }
+            });
+
+            // BG Blobs Drift
+            gsap.to(".hero-blob", {
+                x: "random(-50, 50)",
+                y: "random(-50, 50)",
+                scale: "random(0.8, 1.2)",
+                duration: "random(10, 20)",
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+
+            // ✨ CLEANING ANIMATION ✨
             const cleaningTl = gsap.timeline({ delay: 0.8 });
 
             cleaningTl
-                // 1. Hand enters
                 .fromTo(".cleaning-hand",
                     { x: 300, y: 100, rotate: 30, opacity: 0 },
                     { x: 20, y: -5, rotate: 0, opacity: 1, duration: 0.48, ease: "power3.out" }
                 )
-                // 2. The Wipe Action
                 .to(".cleaning-hand", {
                     x: -20, y: 5, rotate: -5, duration: 0.16, repeat: 3, yoyo: true, ease: "sine.inOut"
                 })
-                // 3. Dirt disappears during wipe
                 .to(".clean-dirt", {
                     opacity: 0, scale: 1.1, filter: "blur(20px)", duration: 0.32, ease: "power2.in"
                 }, "-=0.48")
-                // 4. Hand leaves
                 .to(".cleaning-hand", {
                     x: -400, y: 200, rotate: -40, opacity: 0, duration: 0.56, ease: "power2.in"
                 })
-                // 5. Shine Pop
                 .fromTo(".clean-sparkle",
                     { scale: 0, opacity: 0, rotate: -45 },
                     { scale: 1.5, opacity: 1, rotate: 45, duration: 0.4, ease: "back.out(3)" },
@@ -71,17 +92,74 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
     }, []);
 
     return (
-        <section ref={root} className="relative min-h-[85vh] flex flex-col items-center justify-center pt-12 pb-12 px-6 overflow-hidden bg-white">
+        <section ref={root} className="relative min-h-[95vh] flex flex-col items-center justify-center pt-12 pb-12 px-6 overflow-hidden bg-white">
 
-            <div className="absolute inset-0 bg-white" />
+            {/* --- Premium Background Layer --- */}
+            <div className="absolute inset-0 pointer-events-none">
+                {/* Mesh Gradient / Blobs */}
+                <div className="hero-blob absolute top-[10%] left-[10%] w-[40vw] h-[40vw] bg-brand-green/5 rounded-full blur-[120px]" />
+                <div className="hero-blob absolute bottom-[10%] right-[10%] w-[35vw] h-[35vw] bg-blue-900/[0.03] rounded-full blur-[120px]" />
+                <div className="hero-blob absolute top-[40%] right-[15%] w-[20vw] h-[20vw] bg-brand-green/[0.03] rounded-full blur-[80px]" />
+
+                {/* Subtle Grid Pattern */}
+                <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`, backgroundSize: '32px 32px' }} />
+
+                {/* Noise Texture */}
+                <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+            </div>
+
+            {/* --- Floating Decorative Badges --- */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none select-none hidden lg:block">
+                {/* Badge 1 - Top Left */}
+                <div className="floating-badge absolute top-[25%] left-[12%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+                    <div className="w-8 h-8 rounded-lg bg-brand-green/10 flex items-center justify-center text-brand-green">
+                        <Award size={18} />
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Опыт на рынке</p>
+                        <p className="text-sm font-bold text-brand-dark">15+ Лет</p>
+                    </div>
+                </div>
+
+                {/* Badge 2 - Bottom Left */}
+                <div className="floating-badge absolute bottom-[25%] left-[15%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+                    <div className="w-8 h-8 rounded-lg bg-blue-900/10 flex items-center justify-center text-blue-900">
+                        <ShieldCheck size={18} />
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Сертификация</p>
+                        <p className="text-sm font-bold text-brand-dark">ISO 9001</p>
+                    </div>
+                </div>
+
+                {/* Badge 3 - Top Right */}
+                <div className="floating-badge absolute top-[30%] right-[10%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+                    <div className="w-8 h-8 rounded-lg bg-brand-green/10 flex items-center justify-center text-brand-green">
+                        <Users size={18} />
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Клиенты</p>
+                        <p className="text-sm font-bold text-brand-dark">500+ B2B</p>
+                    </div>
+                </div>
+
+                {/* Badge 4 - Bottom Right */}
+                <div className="floating-badge absolute bottom-[30%] right-[12%] flex items-center gap-3 bg-white/40 backdrop-blur-md border border-black/[0.03] px-5 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
+                    <div className="w-8 h-8 rounded-lg bg-blue-900/10 flex items-center justify-center text-blue-900">
+                        <Clock size={18} />
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-dark/30 leading-none mb-1">Поддержка</p>
+                        <p className="text-sm font-bold text-brand-dark">24/7 Сервис</p>
+                    </div>
+                </div>
+            </div>
 
             <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
                 <div className="hero-fade-in mb-8">
                     <img src="/logo-center.png" alt="IC GROUP" className="h-28 md:h-36 w-auto object-contain" />
                 </div>
-
-
 
                 {/* Ultra-tight Minimalist Heading */}
                 <h1 className="flex flex-col items-center mb-8 select-none font-extrabold tracking-tighter uppercase whitespace-nowrap leading-[0.8] relative z-10">
@@ -94,14 +172,14 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                             Чистоту
                         </span>
 
-                        {/* 🌫️ The New Organic Dirt Spot - Behind text or easier to read */}
+                        {/* 🌫️ The New Organic Dirt Spot */}
                         <div className="clean-dirt absolute top-1/2 right-[-10%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-28 md:h-28 pointer-events-none z-10 opacity-40 flex items-center justify-center mix-blend-multiply">
                             <svg viewBox="0 0 200 200" className="w-full h-full text-[#5c6066] fill-current">
                                 <path d="M41.7,-72.4C53.4,-64.7,62.1,-53.4,68.9,-41.4C75.7,-29.4,80.6,-16.7,81.1,-3.7C81.6,9.3,77.7,22.6,71.2,34.8C64.7,47,55.6,58.1,44.4,66.5C33.2,74.9,19.9,80.6,6.1,80.9C-7.7,81.2,-21.9,76.1,-34.5,68.9C-47.1,61.7,-58.1,52.4,-66.4,41.2C-74.7,30,-80.3,16.9,-81.1,3.4C-81.9,-10.1,-77.9,-24,-69.9,-35.8C-61.9,-47.6,-49.9,-57.3,-37.4,-64.5C-24.9,-71.7,-11.9,-76.4,2.1,-79.8C16.1,-83.2,30,-80.1,41.7,-72.4Z" transform="translate(100 100)" />
                             </svg>
                         </div>
 
-                        {/* ✨ The Clean Sparkle (100% Opacity + Slight Green Glow) */}
+                        {/* ✨ The Clean Sparkle */}
                         <div className="clean-sparkle absolute top-0 right-0 w-24 h-24 pointer-events-none z-[50] opacity-0 flex items-center justify-center">
                             <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-white drop-shadow-[0_0_8px_rgba(162,192,55,0.4)]">
                                 <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="currentColor" />
@@ -122,20 +200,18 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
                 <div className="hero-fade-in max-w-2xl mb-8">
                     <p className="text-lg md:text-xl font-semibold text-brand-dark/50 tracking-tight leading-tight">
-                        Лидер профессионального клиннинга в Казахстане. <br />
+                        Лидер профессионального клининга в Казахстане. <br />
                     </p>
                 </div>
 
                 <div className="hero-fade-in flex flex-col items-center gap-6">
                     <button
                         onClick={onCalcOpen}
-                        className="group relative px-12 py-6 overflow-hidden rounded-full transition-all duration-700 hover:scale-105 active:scale-95"
+                        className="group relative px-12 py-6 overflow-hidden rounded-full transition-all duration-700 hover:scale-105 active:scale-95 shadow-xl shadow-brand-dark/10"
                     >
                         <div className="absolute inset-0 bg-brand-dark group-hover:bg-brand-green transition-colors duration-700" />
-                        <span className="relative z-10 !text-white text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#FFFFFF', fill: '#FFFFFF' }}>Оставить заявку</span>
+                        <span className="relative z-10 !text-white text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#FFFFFF' }}>Оставить заявку</span>
                     </button>
-
-
                 </div>
             </div>
         </section>
@@ -143,3 +219,4 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 };
 
 export default Hero;
+
