@@ -78,7 +78,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
             <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
                 <div className="hero-fade-in mb-8">
-                    <img src="logo center.png" alt="IC GROUP" className="h-28 md:h-36 w-auto object-contain" />
+                    <img src="/logo-center.png" alt="IC GROUP" className="h-28 md:h-36 w-auto object-contain" />
                 </div>
 
 
@@ -101,9 +101,9 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                             </svg>
                         </div>
 
-                        {/* ✨ The Clean Sparkle (Almost White) */}
+                        {/* ✨ The Clean Sparkle (100% Opacity + Slight Green Glow) */}
                         <div className="clean-sparkle absolute top-0 right-0 w-24 h-24 pointer-events-none z-[50] opacity-0 flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-white/60">
+                            <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-white drop-shadow-[0_0_8px_rgba(162,192,55,0.4)]">
                                 <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="currentColor" />
                             </svg>
                         </div>

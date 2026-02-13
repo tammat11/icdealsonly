@@ -72,7 +72,7 @@ const ServicesSection = () => {
                     100% { transform: translateX(-33.333%); }
                 }
                 .animate-marquee-slow {
-                    animation: marquee-scroll 100s linear infinite;
+                    animation: marquee-scroll 80s linear infinite;
                 }
                 .animate-marquee-slow:hover {
                     animation-play-state: paused;
