@@ -9,17 +9,28 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.config({ force3D: true });
 
 function App() {
   const mainRef = useRef(null);
 
   useEffect(() => {
+    // Enable better mobile scroll handling
+    ScrollTrigger.normalizeScroll(true);
+
     const refreshTrigger = () => {
       ScrollTrigger.refresh();
     };
 
     window.addEventListener('load', refreshTrigger);
-    window.addEventListener('resize', refreshTrigger);
+
+    // Use debounced or limited resize
+    let resizeTimer: any;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+    };
+    window.addEventListener('resize', handleResize);
 
     const ctx = gsap.context(() => {
       // reveal-section logic
@@ -36,8 +47,9 @@ function App() {
             },
             y: 0,
             opacity: 1,
-            duration: 1.2,
-            ease: "power3.out"
+            duration: 1,
+            ease: "power2.out",
+            overwrite: 'auto'
           }
         );
       });
@@ -47,9 +59,9 @@ function App() {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.refresh();
+      ScrollTrigger.normalizeScroll(false);
       window.removeEventListener('load', refreshTrigger);
-      window.removeEventListener('resize', refreshTrigger);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -66,9 +78,6 @@ function App() {
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Subtle Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`, backgroundSize: '32px 32px' }} />
-
-        {/* Noise Texture */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
       </div>
 
       <main className="relative z-10 w-full">

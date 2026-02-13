@@ -143,11 +143,8 @@ const ApplicationForm = () => {
             <div className="max-w-4xl mx-auto px-6">
                 <div className="bg-gradient-to-br from-[#1a1c23] to-[#0f1115] text-white p-8 md:p-16 rounded-[40px] relative overflow-hidden shadow-2xl form-reveal border border-white/5">
                     {/* Decorative Elements */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/20 rounded-full blur-[120px] pointer-events-none opacity-50" />
-                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900/20 rounded-full blur-[100px] pointer-events-none opacity-50" />
-
-                    {/* Noise Texture */}
-                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/20 rounded-full blur-[80px] pointer-events-none opacity-50" />
+                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900/20 rounded-full blur-[80px] pointer-events-none opacity-50" />
 
                     <div className="relative z-10 text-center md:text-left">
                         <div className="mb-12">

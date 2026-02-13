@@ -19,20 +19,21 @@
 
 @layer base {
 
-  html,
-  body {
-    overflow-x: hidden;
-    width: 100%;
-    position: relative;
-    -webkit-overflow-scrolling: touch;
-  }
-
   html {
-    scroll-behavior: smooth;
     background: #FFFFFF;
     color: #1A1D1E;
     -webkit-text-size-adjust: 100%;
     font-size: 16px;
+    height: 100%;
+  }
+
+  body {
+    @apply bg-brand-light text-brand-dark font-sans selection:bg-brand-green/20;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
   }
 
   @media (min-width: 768px) {
