@@ -1,7 +1,16 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Zap, Settings2, Building2, ShieldCheck, Coffee, Truck, Box, Droplets } from 'lucide-react';
+import {
+    Building2,
+    ShieldCheck,
+    Truck,
+    Waves,
+    Sparkles,
+    Hammer,
+    PackageCheck,
+    CupSoda
+} from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +22,7 @@ const ServicesSection = () => {
         {
             title: "КОМПЛЕКСНАЯ УБОРКА",
             description: "Профессиональный клининг любой сложности: от ежедневной уборки офисов до спецработ после стройки.",
-            icon: <Droplets className="w-8 h-8" />,
+            icon: <Waves className="w-8 h-8" />,
             image: "https://images.unsplash.com/photo-1581578731548-c64695ce6952?auto=format&fit=crop&q=80&w=1200",
             accent: "bg-brand-green/10"
         },
@@ -27,14 +36,14 @@ const ServicesSection = () => {
         {
             title: "ТЕХНИЧЕСКИЙ СЕРВИС",
             description: "Инженерное обслуживание, чистка кондиционеров, вентиляционных каналов и откачка септиков.",
-            icon: <Settings2 className="w-8 h-8" />,
+            icon: <Hammer className="w-8 h-8" />,
             image: "https://images.unsplash.com/photo-1581094288338-2314dddb7edd?auto=format&fit=crop&q=80&w=1200",
             accent: "bg-orange-500/5"
         },
         {
             title: "СПЕЦИАЛИЗИРОВАННАЯ ХИМЧИСТКА",
             description: "Роторная чистка твердых покрытий, химчистка мебели, ковроланов и перегородок.",
-            icon: <Zap className="w-8 h-8" />,
+            icon: <Sparkles className="w-8 h-8" />,
             image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1200",
             accent: "bg-purple-500/5"
         },
@@ -55,41 +64,27 @@ const ServicesSection = () => {
         {
             title: "СНАБЖЕНИЕ И МАТЕРИАЛЫ",
             description: "Комплексная поставка расходных материалов, средств гигиены и грязезащитных покрытий.",
-            icon: <Box className="w-8 h-8" />,
+            icon: <PackageCheck className="w-8 h-8" />,
             image: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?auto=format&fit=crop&q=80&w=1200",
             accent: "bg-indigo-500/5"
         },
         {
             title: "КОФЕ И КОРПОРАТИВНЫЙ СЕРВИС",
             description: "Услуги кофе-леди, поставка воды, бакалеи и флористическое оформление пространств.",
-            icon: <Coffee className="w-8 h-8" />,
+            icon: <CupSoda className="w-8 h-8" />,
             image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1200",
             accent: "bg-amber-500/5"
         }
     ];
 
-    // Infinite feel
+    // Duplicate services multiple times for seamless animation
     const infiniteServices = [...services, ...services, ...services, ...services];
 
     useEffect(() => {
-        const scrollContainer = scrollRef.current;
-        if (!scrollContainer) return;
-
-        const totalItems = services.length;
-        const getCardWidth = () => {
-            const firstCard = scrollContainer.querySelector('.service-card-wrapper');
-            return firstCard ? firstCard.getBoundingClientRect().width + 24 : (window.innerWidth > 768 ? 384 : 284);
-        };
-
-        const cardTotal = getCardWidth();
-        const middleOffset = totalItems * 1.5 * cardTotal;
-
-        scrollContainer.scrollLeft = middleOffset - (window.innerWidth / 2 - (cardTotal - 24) / 2);
-
         const ctx = gsap.context(() => {
             // 1. Cinematic Title Reveal
             const lines = gsap.utils.toArray<HTMLElement>(".services-title-line");
-            lines.forEach((line, i) => {
+            lines.forEach((line: HTMLElement, i: number) => {
                 gsap.from(line, {
                     x: i === 0 ? -100 : 100,
                     skewX: i === 0 ? -20 : 20,
@@ -104,18 +99,6 @@ const ServicesSection = () => {
                     }
                 });
             });
-
-            // 2. Cards Reveal: Entire Row slides from right
-            gsap.from(scrollRef.current, {
-                x: 500,
-                opacity: 0,
-                duration: 1.8,
-                ease: "power4.out",
-                scrollTrigger: {
-                    trigger: ".service-cards-container",
-                    start: "top 90%",
-                }
-            });
         }, sectionRef);
 
         return () => ctx.revert();
@@ -123,33 +106,41 @@ const ServicesSection = () => {
 
     return (
         <section ref={sectionRef} className="section-padding-compact bg-white relative" id="services">
+            <style>{`
+                @keyframes marquee-right {
+                    0% { transform: translateX(-50%); }
+                    100% { transform: translateX(0%); }
+                }
+                .animate-marquee-right {
+                    animation: marquee-right 60s linear infinite;
+                }
+                .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+            `}</style>
             <div className="max-w-7xl mx-auto px-6 relative z-30 mb-6 md:mb-10 text-center">
                 <div className="section-tag">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
                     <span>Our Capabilities</span>
                 </div>
-                <h2 className="section-header italic text-brand-dark overflow-visible">
-                    <div className="services-title-line block">СТАНДАРТ</div>
-                    <div className="services-title-line block text-brand-green">ПРЕВОСХОДСТВА</div>
+                <h2 className="section-header text-brand-dark overflow-visible">
+                    <div className="services-title-line block">НАШИ</div>
+                    <div className="services-title-line block text-brand-green">УСЛУГИ</div>
                 </h2>
             </div>
 
             {/* Horizontal Scroll Area */}
-            <div className="relative w-full group service-cards-container">
+            <div className="relative w-full overflow-hidden service-cards-container">
                 <div
                     ref={scrollRef}
-                    className="flex overflow-x-auto gap-6 py-12 md:py-24 snap-x snap-mandatory no-scrollbar scroll-smooth cursor-grab active:cursor-grabbing"
-                    style={{
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                    }}
+                    className="flex gap-6 py-12 md:py-24 w-max animate-marquee-right hover:[animation-play-state:paused]"
                 >
                     {infiniteServices.map((service, i) => (
                         <div
                             key={i}
-                            className="service-card-wrapper flex-shrink-0 w-[260px] md:w-[360px] snap-center"
+                            className="service-card-wrapper flex-shrink-0 w-[260px] md:w-[360px]"
                         >
-                            <div className="group/card relative overflow-hidden rounded-[24px] md:rounded-[40px] border border-black/[0.04] bg-brand-light h-[320px] md:h-[480px] transition-all duration-700 hover:border-brand-green/30 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] flex flex-col justify-end p-6 md:p-10 whitespace-normal">
+                            <div className="group/card relative overflow-hidden rounded-[24px] md:rounded-[40px] border border-black/[0.04] bg-brand-light h-[320px] md:h-[480px] transition-all duration-700 hover:border-brand-green/30 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] flex flex-col justify-end p-6 md:p-10 whitespace-normal text-left">
 
                                 {service.image && (
                                     <>
@@ -167,7 +158,7 @@ const ServicesSection = () => {
                                 </div>
 
                                 <div className="space-y-4 relative z-20">
-                                    <h3 className="text-lg md:text-2xl font-bold uppercase tracking-tight text-brand-dark group-hover/card:text-brand-green transition-colors duration-500 leading-tight italic">
+                                    <h3 className="text-lg md:text-2xl font-bold uppercase tracking-tight text-brand-dark group-hover/card:text-brand-green transition-colors duration-500 leading-tight">
                                         {service.title}
                                     </h3>
                                     <p className="text-brand-dark/70 text-sm md:text-base font-medium leading-snug transition-colors duration-500 group-hover/card:text-brand-dark/90">
@@ -187,7 +178,7 @@ const ServicesSection = () => {
 
             {/* Bottom Status Tag */}
             <div className="flex flex-col items-center mt-8 px-6">
-                <p className="text-[9px] font-semibold uppercase tracking-[0.4em] text-brand-dark/20 italic">Прокрутите для ознакомления</p>
+                <p className="text-[9px] font-semibold uppercase tracking-[0.4em] text-brand-dark/20">Профессиональные решения для вашего бизнеса</p>
             </div>
 
             <style>{`

@@ -35,34 +35,34 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
             );
 
             // ✨ NEW CLEANING ANIMATION ✨
-            const cleaningTl = gsap.timeline({ delay: 1.8 });
+            const cleaningTl = gsap.timeline({ delay: 0.8 });
 
             cleaningTl
                 // 1. Hand enters
                 .fromTo(".cleaning-hand",
                     { x: 300, y: 100, rotate: 30, opacity: 0 },
-                    { x: 20, y: -5, rotate: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
+                    { x: 20, y: -5, rotate: 0, opacity: 1, duration: 0.48, ease: "power3.out" }
                 )
                 // 2. The Wipe Action
                 .to(".cleaning-hand", {
-                    x: -20, y: 5, rotate: -5, duration: 0.2, repeat: 3, yoyo: true, ease: "sine.inOut"
+                    x: -20, y: 5, rotate: -5, duration: 0.16, repeat: 3, yoyo: true, ease: "sine.inOut"
                 })
                 // 3. Dirt disappears during wipe
                 .to(".clean-dirt", {
-                    opacity: 0, scale: 1.1, filter: "blur(20px)", duration: 0.4, ease: "power2.in"
-                }, "-=0.6")
+                    opacity: 0, scale: 1.1, filter: "blur(20px)", duration: 0.32, ease: "power2.in"
+                }, "-=0.48")
                 // 4. Hand leaves
                 .to(".cleaning-hand", {
-                    x: -400, y: 200, rotate: -40, opacity: 0, duration: 0.7, ease: "power2.in"
+                    x: -400, y: 200, rotate: -40, opacity: 0, duration: 0.56, ease: "power2.in"
                 })
                 // 5. Shine Pop
                 .fromTo(".clean-sparkle",
                     { scale: 0, opacity: 0, rotate: -45 },
-                    { scale: 1.5, opacity: 1, rotate: 45, duration: 0.5, ease: "back.out(3)" },
-                    "-=0.4"
+                    { scale: 1.5, opacity: 1, rotate: 45, duration: 0.4, ease: "back.out(3)" },
+                    "-=0.32"
                 )
                 .to(".clean-sparkle", {
-                    opacity: 0, scale: 0, duration: 0.4, delay: 0.2
+                    opacity: 0, scale: 0, duration: 0.32, delay: 0.16
                 });
 
         }, root);
@@ -88,7 +88,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     <span className="hero-title-reveal block text-[clamp(55px,15vw,120px)] text-brand-dark">
                         Создать
                     </span>
-                    <span className="hero-title-reveal block text-[clamp(60px,16vw,140px)] text-brand-green italic relative inline-block px-4 py-2 overflow-visible group">
+                    <span className="hero-title-reveal block text-[clamp(60px,16vw,140px)] text-brand-green relative inline-block px-4 py-2 overflow-visible group">
 
                         <span className="relative z-20">
                             Чистоту
@@ -142,7 +142,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                             <span className="text-[7px] font-medium text-brand-dark/50 uppercase tracking-widest">Founder IC Group</span>
                         </div>
                         <div className="w-[1px] h-8 bg-brand-dark/20" />
-                        <div className="text-[14px] font-semibold uppercase tracking-[0.2em] text-brand-dark italic">
+                        <div className="text-[14px] font-semibold uppercase tracking-[0.2em] text-brand-dark">
                             #1 KZ
                         </div>
                     </div>

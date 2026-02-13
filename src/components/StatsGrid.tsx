@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Users, Calendar, Maximize, PieChart, Truck, Briefcase } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,12 +10,12 @@ const StatsGrid = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const stats = [
-        { value: "3000", suffix: "+", label: "СОТРУДНИКОВ В\nХОЛДИНГЕ" },
-        { value: "12", suffix: "", label: "ЛЕТ НА РЫНКЕ\nКАЗАХСТАНА" },
-        { value: "1", suffix: "M+", label: "M² В ЕЖЕДНЕВНОМ\nУПРАВЛЕНИИ" },
-        { value: "40", suffix: "%", label: "ДОЛЯ РЫНКА В\nСЕГМЕНТЕ B2B" },
-        { value: "500", suffix: "+", label: "ЕДИНИЦ\nСПЕЦТЕХНИКИ" },
-        { value: "250", suffix: "+", label: "КОРПОРАТИВНЫХ\nКЛИЕНТОВ" },
+        { value: "3000", suffix: "+", label: "СОТРУДНИКОВ В\nХОЛДИНГЕ", icon: <Users className="w-6 h-6" /> },
+        { value: "12", suffix: "", label: "ЛЕТ НА РЫНКЕ\nКАЗАХСТАНА", icon: <Calendar className="w-6 h-6" /> },
+        { value: "1", suffix: "M+", label: "M² В ЕЖЕДНЕВНОМ\nУПРАВЛЕНИИ", icon: <Maximize className="w-6 h-6" /> },
+        { value: "40", suffix: "%", label: "ДОЛЯ РЫНКА В\nСЕГМЕНТЕ B2B", icon: <PieChart className="w-6 h-6" /> },
+        { value: "500", suffix: "+", label: "ЕДИНИЦ\nСПЕЦТЕХНИКИ", icon: <Truck className="w-6 h-6" /> },
+        { value: "250", suffix: "+", label: "КОРПОРАТИВНЫХ\nКЛИЕНТОВ", icon: <Briefcase className="w-6 h-6" /> },
     ];
 
     useEffect(() => {
@@ -66,7 +67,7 @@ const StatsGrid = () => {
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
                         <span>Market Leadership</span>
                     </div>
-                    <h2 className="section-header italic text-brand-dark">
+                    <h2 className="section-header text-brand-dark">
                         ЦИФРЫ <span className="text-brand-green">IC GROUP</span>
                     </h2>
                 </div>
@@ -84,11 +85,14 @@ const StatsGrid = () => {
 
                                 {/* Main Content centered */}
                                 <div className="relative z-10 flex flex-col items-center space-y-4">
-                                    <div className="flex items-baseline justify-center gap-1">
-                                        <span className="stat-number font-bold tracking-tighter italic leading-none text-5xl md:text-6xl text-brand-green" data-value={stat.value}>0</span>
-                                        <span className="font-bold italic leading-none text-3xl md:text-3xl text-brand-green">{stat.suffix}</span>
+                                    <div className="w-12 h-12 rounded-2xl bg-brand-green/10 flex items-center justify-center text-brand-green group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-500">
+                                        {stat.icon}
                                     </div>
-                                    <div className="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">
+                                    <div className="flex items-baseline justify-center gap-1">
+                                        <span className="stat-number font-bold tracking-tighter leading-none text-4xl md:text-5xl text-brand-green" data-value={stat.value}>0</span>
+                                        <span className="font-bold leading-none text-2xl md:text-3xl text-brand-green">{stat.suffix}</span>
+                                    </div>
+                                    <div className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">
                                         {stat.label}
                                     </div>
                                 </div>
