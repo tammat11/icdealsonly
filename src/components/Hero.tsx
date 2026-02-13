@@ -106,7 +106,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
     }, []);
 
     return (
-        <section ref={root} className="relative h-[100svh] flex flex-col items-center justify-center pt-16 pb-12 px-6 overflow-hidden bg-white">
+        <section ref={root} className="relative h-screen min-h-[100dvh] flex flex-col items-center justify-center pt-10 pb-10 px-6 overflow-hidden bg-white">
 
             {/* --- Premium Background Layer --- */}
             <div className="absolute inset-0 pointer-events-none">
@@ -137,16 +137,16 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
             <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
-                <div className="hero-fade-in mb-6">
-                    <img src="/logo-center-back.png" alt="IC GROUP" className="h-20 md:h-36 w-auto object-contain" />
+                <div className="hero-fade-in mb-4">
+                    <img src="/logo-center-back.png" alt="IC GROUP" className="h-16 md:h-36 w-auto object-contain" />
                 </div>
 
                 {/* Ultra-tight Minimalist Heading */}
-                <h1 className="flex flex-col items-center mb-8 select-none font-extrabold tracking-tighter uppercase whitespace-nowrap leading-[0.8] relative z-10">
-                    <span className="hero-title-reveal block text-[clamp(55px,15vw,120px)] text-brand-dark">
+                <h1 className="flex flex-col items-center mb-6 select-none font-extrabold tracking-tighter uppercase whitespace-nowrap leading-[0.8] relative z-10">
+                    <span className="hero-title-reveal block text-[clamp(42px,12vw,120px)] text-brand-dark">
                         Создать
                     </span>
-                    <span className="hero-title-reveal block text-[clamp(60px,16vw,140px)] text-brand-green relative inline-block px-4 py-2 overflow-visible group">
+                    <span className="hero-title-reveal block text-[clamp(48px,14vw,140px)] text-brand-green relative inline-block px-4 py-1 overflow-visible group">
 
                         <span className="relative z-20">
                             Чистоту
@@ -173,13 +173,13 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                             className="cleaning-hand absolute top-0 right-[-20%] w-40 md:w-64 h-auto pointer-events-none z-[60] opacity-0"
                         />
                     </span>
-                    <span className="hero-title-reveal block text-[clamp(55px,15vw,120px)] text-brand-dark">
+                    <span className="hero-title-reveal block text-[clamp(42px,12vw,120px)] text-brand-dark">
                         Во всем
                     </span>
                 </h1>
 
-                <div className="hero-fade-in max-w-2xl mb-8">
-                    <p className="text-lg md:text-xl font-semibold text-brand-dark/50 tracking-tight leading-tight">
+                <div className="hero-fade-in max-w-2xl mb-6">
+                    <p className="text-base md:text-xl font-semibold text-brand-dark/50 tracking-tight leading-tight">
                         Лидер профессионального клининга в Казахстане. <br />
                     </p>
                 </div>
