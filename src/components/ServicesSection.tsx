@@ -19,24 +19,24 @@ const ServicesSection = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     const mainServices = [
-        { id: "01", title: "Базовая уборка", icon: <Droplets className="w-6 h-6" />, image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=800" },
-        { id: "02", title: "Поддерживающая уборка", icon: <Wind className="w-6 h-6" />, image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" },
-        { id: "03", title: "Генеральная уборка", icon: <Sparkles className="w-6 h-6" />, image: "https://images.unsplash.com/photo-1581578731548-c64695ce6952?auto=format&fit=crop&q=80&w=800" },
-        { id: "04", title: "Послестроительная уборка", icon: <Hammer className="w-6 h-6" />, image: "https://images.unsplash.com/photo-1505798577917-a65157d3320a?auto=format&fit=crop&q=80&w=800" },
+        { id: "01", title: "Базовая уборка", icon: <Droplets className="w-6 h-6" />, image: "/basic-cleaning.png" },
+        { id: "02", title: "Поддерживающая уборка", icon: <Wind className="w-6 h-6" />, image: "/maintenance-cleaning.png" },
+        { id: "03", title: "Генеральная уборка", icon: <Sparkles className="w-6 h-6" />, image: "/deep-cleaning.png" },
+        { id: "04", title: "Послестроительная уборка", icon: <Hammer className="w-6 h-6" />, image: "/post-construction.png" },
     ];
 
     const otherServices = [
-        { id: "05", title: "Мойка витражей", icon: <Waves className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&q=80&w=400" },
-        { id: "06", title: "Высотные работы", icon: <Building2 className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=400" },
-        { id: "07", title: "Флористы", icon: <Flower2 className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1558036117-15d82a90bd36?auto=format&fit=crop&q=80&w=400" },
-        { id: "08", title: "Дезинсекция", icon: <Bug className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1584622741082-ef8ec202404e?auto=format&fit=crop&q=80&w=400" },
-        { id: "09", title: "Инженерия", icon: <Wrench className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=400" },
-        { id: "10", title: "Уборка снега", icon: <Snowflake className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1517210122415-b0c70b2a09bf?auto=format&fit=crop&q=80&w=400" },
-        { id: "11", title: "Кофеледи", icon: <Coffee className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400" },
-        { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "https://images.unsplash.com/photo-1517677208171-4bc6725a3e60?auto=format&fit=crop&q=80&w=400" },
+        { id: "05", title: "Мойка витражей", icon: <Waves className="w-5 h-5" />, image: "/window-cleaning.png" },
+        { id: "06", title: "Высотные работы", icon: <Building2 className="w-5 h-5" />, image: "/high-altitude.png" },
+        { id: "07", title: "Флористы", icon: <Flower2 className="w-5 h-5" />, image: "/florist.png" },
+        { id: "08", title: "Дезинсекция", icon: <Bug className="w-5 h-5" />, image: "/pest-control.png" },
+        { id: "09", title: "Инженерия", icon: <Wrench className="w-5 h-5" />, image: "/engineering.png" },
+        { id: "10", title: "Уборка снега", icon: <Snowflake className="w-5 h-5" />, image: "/snow-removal.png" },
+        { id: "11", title: "Кофеледи", icon: <Coffee className="w-5 h-5" />, image: "/coffee-lady.png" },
+        { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "/dry-cleaning.png" },
     ];
 
-    const infiniteOthers = [...otherServices, ...otherServices, ...otherServices];
+
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -102,65 +102,78 @@ const ServicesSection = () => {
                                 alt={service.title}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            <div className="absolute top-4 left-3 right-3 md:top-6 md:left-5 md:right-5">
-                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[0.9] drop-shadow-lg">
+                            <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-5 md:right-5">
+                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-3 md:mb-5">
                                     {service.title}
                                 </h3>
-                            </div>
 
-                            <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-5 md:right-5 flex justify-between items-end">
-                                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
-                                    <div className="scale-75 md:scale-100">{service.icon}</div>
+                                <div className="flex justify-between items-end">
+                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
+                                        <div className="scale-75 md:scale-100">{service.icon}</div>
+                                    </div>
+                                    <span className="text-brand-green text-xl md:text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
                                 </div>
-                                <span className="text-brand-green text-xl md:text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Bottom Marquee for secondary cards */}
+            {/* Bottom Scrollable Section for secondary cards */}
             <div className={`relative border-t border-black/5 pt-10 service-fade-in ${isVisible ? 'visible' : ''}`} style={{ transitionDelay: '500ms' }}>
-                <div className="mb-6 px-6 max-w-7xl mx-auto">
+                <div className="mb-6 px-6 max-w-7xl mx-auto flex justify-between items-end">
                     <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
-                </div>
-
-                <div className="overflow-hidden flex">
-                    <div className="flex gap-3 animate-marquee-slow py-2">
-                        {infiniteOthers.map((service, i) => (
-                            <div
-                                key={`${service.id}-${i}`}
-                                className="flex-shrink-0 w-[180px] md:w-[220px] h-[240px] md:h-[280px] relative rounded-[16px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-500"
-                            >
-                                <img
-                                    src={service.image}
-                                    alt={service.title}
-                                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                                <div className="absolute top-6 left-5 right-5">
-                                    <h4 className="text-sm md:text-base font-bold text-white uppercase leading-tight drop-shadow-sm">
-                                        {service.title}
-                                    </h4>
-                                </div>
-
-                                <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
-                                    <div className="text-brand-green">
-                                        {service.icon}
-                                    </div>
-                                    <span className="text-[10px] font-bold text-white/40">{service.id}</span>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="hidden md:flex gap-2">
+                        {/* Indicating scrollability */}
+                        <div className="text-[9px] font-bold uppercase tracking-widest text-brand-dark/30">Скролл &rarr;</div>
                     </div>
                 </div>
 
-                {/* Gradient Masks */}
-                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+                <div
+                    className="overflow-x-auto flex gap-3 px-6 pb-8 snap-x snap-mandatory scrollbar-hide"
+                    style={{
+                        scrollbarWidth: 'none',
+                        msOverflowStyle: 'none',
+                        WebkitOverflowScrolling: 'touch'
+                    }}
+                >
+                    <style>{`
+                        .scrollbar-hide::-webkit-scrollbar {
+                            display: none;
+                        }
+                    `}</style>
+                    {otherServices.map((service) => (
+                        <div
+                            key={service.id}
+                            className="snap-center flex-shrink-0 w-[240px] md:w-[280px] h-[320px] md:h-[360px] relative rounded-[20px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                        >
+                            <img
+                                src={service.image}
+                                alt={service.title}
+                                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+
+                            <div className="absolute top-6 left-5 right-5">
+                                <h4 className="text-lg md:text-xl font-bold text-white uppercase leading-tight drop-shadow-sm">
+                                    {service.title}
+                                </h4>
+                            </div>
+
+                            <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
+                                <div className="text-brand-green">
+                                    {service.icon}
+                                </div>
+                                <span className="text-[10px] font-bold text-white/40">{service.id}</span>
+                            </div>
+                        </div>
+                    ))}
+
+                    {/* Spacer for right padding */}
+                    <div className="w-2 flex-shrink-0" />
+                </div>
             </div>
         </section>
     );

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -6,6 +6,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ApplicationForm = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        comment: ''
+    });
+    const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -24,58 +30,162 @@ const ApplicationForm = () => {
         return () => ctx.revert();
     }, []);
 
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('submitting');
+
+        const webhookUrl = import.meta.env.VITE_BITRIX_WEBHOOK_URL;
+
+        if (!webhookUrl) {
+            console.error("Webhook URL not found in environment variables");
+            setStatus('error');
+            return;
+        }
+
+        // Prepare fields for Bitrix24
+        // UF_CRM_1728031304072 - номер
+        // UF_CRM_1728030866213 - фио
+        // COMMENTS - комментарий
+        // CATEGORY_ID: 0 (General funnel)
+        // STAGE_ID: "NEW" (Default first stage)
+        const payload = {
+            fields: {
+                TITLE: `Заявка с сайта от ${formData.name}`,
+                CATEGORY_ID: 0,
+                STAGE_ID: "NEW",
+                UF_CRM_1728031304072: formData.phone,
+                UF_CRM_1728030866213: formData.name,
+                COMMENTS: formData.comment,
+                SOURCE_ID: "WEB"
+            }
+        };
+
+        try {
+            const response = await fetch(`${webhookUrl}crm.deal.add.json`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                setFormData({ name: '', phone: '', comment: '' });
+                // Reset success message after 5 seconds
+                setTimeout(() => setStatus('idle'), 5000);
+            } else {
+                console.error("Bitrix error", await response.text());
+                setStatus('error');
+            }
+        } catch (error) {
+            console.error("Submission error", error);
+            setStatus('error');
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    };
+
     return (
         <section ref={sectionRef} id="contact-form" className="py-24 bg-white">
             <div className="max-w-4xl mx-auto px-6">
-                <div className="bg-brand-dark text-white p-8 md:p-16 rounded-[40px] relative overflow-hidden shadow-2xl form-reveal">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-brand-green/20 rounded-full blur-[120px]" />
+                <div className="bg-gradient-to-br from-[#1a1c23] to-[#0f1115] text-white p-8 md:p-16 rounded-[40px] relative overflow-hidden shadow-2xl form-reveal border border-white/5">
+                    {/* Decorative Elements */}
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/20 rounded-full blur-[120px] pointer-events-none opacity-50" />
+                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-900/20 rounded-full blur-[100px] pointer-events-none opacity-50" />
 
-                    <div className="relative z-10">
+                    {/* Noise Texture */}
+                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+
+                    <div className="relative z-10 text-center md:text-left">
                         <div className="mb-12">
-                            <h2 className="text-4xl md:text-5xl font-bold mb-4 uppercase tracking-tighter">Оставить заявку</h2>
-                            <p className="text-white/60 text-lg">Заполните форму, и мы свяжемся с вами в ближайшее время для обсуждения вашего проекта.</p>
+                            <h2 className="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-tighter leading-none text-white drop-shadow-md">
+                                Начать сотрудничество
+                            </h2>
+                            <p className="text-white/60 text-base md:text-lg max-w-xl font-light leading-relaxed">
+                                Оставьте заявку, и мы свяжемся с вами для обсуждения деталей вашего проекта.
+                            </p>
                         </div>
 
-                        <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">Ваше имя</label>
-                                <input
-                                    type="text"
-                                    placeholder="Иван Иванов"
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">Телефон</label>
-                                <input
-                                    type="tel"
-                                    placeholder="+7 (___) ___-__-__"
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10"
-                                />
-                            </div>
-                            <div className="space-y-2 md:col-span-2">
-                                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">Email</label>
-                                <input
-                                    type="email"
-                                    placeholder="example@mail.com"
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10"
-                                />
-                            </div>
-                            <div className="space-y-2 md:col-span-2">
-                                <label className="text-xs font-bold uppercase tracking-widest text-white/40 ml-4">О проекте</label>
-                                <textarea
-                                    placeholder="Расскажите о ваших задачах..."
-                                    rows={4}
-                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 placeholder:text-white/20 focus:outline-none focus:border-brand-green transition-all focus:bg-white/10 resize-none"
-                                />
-                            </div>
-                            <div className="md:col-span-2 mt-4">
-                                <button className="group relative w-full overflow-hidden rounded-2xl bg-brand-green py-5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
-                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                                    <span className="relative z-10 text-white font-bold uppercase tracking-[0.2em]">Отправить запрос</span>
+                        {status === 'success' ? (
+                            <div className="bg-brand-green/10 border border-brand-green/30 rounded-3xl p-10 text-center animate-fade-in backdrop-blur-sm">
+                                <div className="w-16 h-16 bg-brand-green/20 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-green">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-2xl font-bold text-white mb-2">Заявка отправлена!</h3>
+                                <p className="text-white/60 mb-8">Мы свяжемся с вами в ближайшее время.</p>
+                                <button
+                                    onClick={() => setStatus('idle')}
+                                    className="px-8 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-bold transition-all uppercase tracking-wider hover:scale-105"
+                                >
+                                    Отправить еще одну
                                 </button>
                             </div>
-                        </form>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-2 group">
+                                    <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Ваше имя</label>
+                                    <input
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        type="text"
+                                        placeholder="Иван Иванов"
+                                        required
+                                        className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl px-6 py-5 placeholder:text-white/20 focus:outline-none focus:border-brand-green/50 focus:bg-white/[0.08] transition-all hover:bg-white/[0.05] text-white"
+                                    />
+                                </div>
+                                <div className="space-y-2 group">
+                                    <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Телефон</label>
+                                    <input
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        type="tel"
+                                        placeholder="+7 (___) ___-__-__"
+                                        required
+                                        className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl px-6 py-5 placeholder:text-white/20 focus:outline-none focus:border-brand-green/50 focus:bg-white/[0.08] transition-all hover:bg-white/[0.05] text-white"
+                                    />
+                                </div>
+
+                                <div className="space-y-2 md:col-span-2 group">
+                                    <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Комментарий</label>
+                                    <textarea
+                                        name="comment"
+                                        value={formData.comment}
+                                        onChange={handleChange}
+                                        placeholder="Расскажите о ваших задачах..."
+                                        rows={4}
+                                        className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl px-6 py-5 placeholder:text-white/20 focus:outline-none focus:border-brand-green/50 focus:bg-white/[0.08] transition-all hover:bg-white/[0.05] resize-none text-white"
+                                    />
+                                </div>
+
+                                <div className="md:col-span-2 mt-6">
+                                    <button
+                                        type="submit"
+                                        disabled={status === 'submitting'}
+                                        className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-brand-green to-[#8ab32b] py-6 transition-all duration-300 hover:shadow-[0_0_40px_-10px_rgba(162,192,55,0.5)] hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
+                                    >
+                                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                                        <span className="relative z-10 text-white font-bold uppercase tracking-[0.2em] text-lg shadow-black/20 drop-shadow-sm">
+                                            {status === 'submitting' ? 'Отправка...' : 'Отправить заявку'}
+                                        </span>
+                                    </button>
+                                    {status === 'error' && (
+                                        <p className="text-red-400 text-sm mt-4 text-center bg-red-500/10 py-2 rounded-lg border border-red-500/20">
+                                            Произошла ошибка. Пожалуйста, проверьте данные и попробуйте еще раз.
+                                        </p>
+                                    )}
+                                </div>
+                            </form>
+                        )}
                     </div>
                 </div>
             </div>
