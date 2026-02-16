@@ -56,7 +56,7 @@ const ServicesSection = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-5 md:right-5">
-                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-2">
+                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-2 min-h-[2.2em] md:min-h-[2.2em] flex items-end">
                                     {service.title}
                                 </h3>
 
