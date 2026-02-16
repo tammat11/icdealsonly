@@ -15,10 +15,10 @@ import {
 
 const ServicesSection = () => {
     const mainServices = [
-        { id: "01", title: "Базовая уборка", icon: <Droplets className="w-6 h-6" />, image: "/basic-cleaning.png" },
-        { id: "02", title: "Поддерживающая уборка", icon: <Wind className="w-6 h-6" />, image: "/maintenance-cleaning.png" },
-        { id: "03", title: "Генеральная уборка", icon: <Sparkles className="w-6 h-6" />, image: "/deep-cleaning.png" },
-        { id: "04", title: "Послестроительная уборка", icon: <Hammer className="w-6 h-6" />, image: "/post-construction.png" },
+        { id: "01", title: "Базовая уборка", description: "Наводим порядок ежедневно", image: "/basic-cleaning.png" },
+        { id: "02", title: "Поддерживающая уборка", description: "Поддерживаем чистоту в течение дня", image: "/maintenance-cleaning.png" },
+        { id: "03", title: "Генеральная уборка", description: "Основательная, длительная уборка", image: "/deep-cleaning.png" },
+        { id: "04", title: "Послестроительная уборка", description: "Приведение помещения в порядок после строительства или ремонта", image: "/post-construction.png" },
     ];
 
     const otherServices = [
@@ -60,14 +60,15 @@ const ServicesSection = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-5 md:right-5">
-                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-3 md:mb-5">
+                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-2">
                                     {service.title}
                                 </h3>
 
-                                <div className="flex justify-between items-end">
-                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
-                                        <div className="scale-75 md:scale-100">{service.icon}</div>
-                                    </div>
+                                <p className="text-[10px] md:text-sm text-white/80 font-medium leading-tight mb-3 md:mb-5 line-clamp-3">
+                                    {service.description}
+                                </p>
+
+                                <div className="flex justify-end items-end">
                                     <span className="text-brand-green text-xl md:text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
                                 </div>
                             </div>
