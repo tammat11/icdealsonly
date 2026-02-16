@@ -1,10 +1,6 @@
 import {
     Building2,
     Waves,
-    Sparkles,
-    Hammer,
-    Droplets,
-    Wind,
     Flower2,
     Bug,
     Wrench,
