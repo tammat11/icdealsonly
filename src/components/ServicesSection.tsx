@@ -56,16 +56,18 @@ const ServicesSection = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-5 md:right-5">
-                                <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-2 min-h-[2.2em] md:min-h-[2.2em] flex items-end">
-                                    {service.title}
-                                </h3>
+                                <div className="flex flex-col justify-end h-[180px]">
+                                    <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-2 h-[2.4em] flex items-start">
+                                        {service.title}
+                                    </h3>
 
-                                <p className="text-[11px] md:text-sm text-white/90 font-medium leading-tight mb-4 md:mb-6 line-clamp-3 drop-shadow-sm">
-                                    {service.description}
-                                </p>
+                                    <p className="text-[11px] md:text-sm text-white/90 font-medium leading-tight mb-4 md:mb-6 h-[4.5em] line-clamp-3 drop-shadow-sm">
+                                        {service.description}
+                                    </p>
 
-                                <div className="flex justify-end items-end">
-                                    <span className="text-brand-green text-xl md:text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
+                                    <div className="flex justify-end items-end">
+                                        <span className="text-brand-green text-xl md:text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,10 +108,7 @@ const ServicesSection = () => {
                                             </h4>
                                         </div>
 
-                                        <div className="absolute bottom-6 left-5 right-5 flex justify-between items-center">
-                                            <div className="text-brand-green">
-                                                {service.icon}
-                                            </div>
+                                        <div className="absolute bottom-6 left-5 right-5 flex justify-end items-center">
                                             <span className="text-[10px] font-bold text-white/40">{service.id}</span>
                                         </div>
                                     </div>
