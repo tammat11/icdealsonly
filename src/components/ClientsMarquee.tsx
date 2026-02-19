@@ -1,8 +1,8 @@
 const clients = [
     { name: "Technodom", domain: "technodom.kz", logo: "/technodom-logo.png" },
-    { name: "Forte Bank", domain: "forte.kz", logo: "/forte-bank.png" },
+    { name: "JTI", domain: "forte.kz", logo: "/forte-bank.png" },
     { name: "H&M", domain: "hm.com", logo: "/hm-logo.png" },
-    { name: "JTI", domain: "jti.com", logo: "/jti-logo.png" },
+    { name: "Forte Bank", domain: "jti.com", logo: "/jti-logo.png" },
     { name: "KOTON", domain: "koton.com", logo: "/koton-logo.png" },
     { name: "Magnum", domain: "magnum.kz" },
     { name: "Kaspi Bank", domain: "kaspi.kz" },
@@ -12,7 +12,6 @@ const clients = [
     { name: "Defacto", domain: "defacto.com.tr" },
     { name: "LPP", domain: "lpp.com" },
     { name: "Air Astana", domain: "airastana.com" },
-    { name: "Samsung", domain: "samsung.com" },
 ];
 
 const ClientsMarquee = () => {
