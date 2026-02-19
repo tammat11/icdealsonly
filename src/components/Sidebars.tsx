@@ -1,4 +1,4 @@
-import { Instagram, Send, MessageCircle } from 'lucide-react';
+import { Instagram, MessageCircle } from 'lucide-react';
 
 const Sidebars = () => {
     return (
@@ -7,10 +7,7 @@ const Sidebars = () => {
                 <a href="https://instagram.com/icgroup.kz" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
                     <Instagram size={18} />
                 </a>
-                <a href="https://t.me/icgroup" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
-                    <Send size={18} />
-                </a>
-                <a href="https://wa.me/77010000000" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
+                <a href="https://whatsapp.com/channel/0029Vb7aAJm9cDDVFjbL8c10" target="_blank" rel="noopener noreferrer" className="text-brand-dark/30 hover:text-brand-green transition-colors duration-300">
                     <MessageCircle size={18} />
                 </a>
             </div>
