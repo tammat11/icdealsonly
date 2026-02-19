@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ApplicationForm = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -45,7 +47,7 @@ const ApplicationForm = () => {
             if (response.ok) {
                 setStatus('success');
                 setFormData({ name: '', phone: '', comment: '' });
-                setTimeout(() => setStatus('idle'), 5000);
+                navigate('/thank-you');
             } else {
                 console.error("Bitrix error", await response.text());
                 setStatus('error');
