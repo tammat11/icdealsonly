@@ -54,6 +54,8 @@
   .premium-card {
     @apply bg-white border border-border-subtle shadow-premium backdrop-blur-sm;
     transition: background-color 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .btn-premium {
@@ -66,6 +68,8 @@
 
   .glass-card {
     @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-glass;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .premium-border {
@@ -142,15 +146,15 @@
 
   0%,
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg) translateZ(0);
   }
 
   33% {
-    transform: translateY(-15px) rotate(2deg);
+    transform: translateY(-15px) rotate(2deg) translateZ(0);
   }
 
   66% {
-    transform: translateY(-5px) rotate(-1deg);
+    transform: translateY(-5px) rotate(-1deg) translateZ(0);
   }
 }
 
@@ -178,15 +182,16 @@
 
 .on-reveal {
   opacity: 0;
-  transform: translateY(60px) rotateX(-15deg) scale(0.95);
-  filter: blur(15px);
+  transform: translateY(60px) rotateX(-15deg) scale(0.95) translateZ(0);
+  filter: blur(8px);
   transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1);
   perspective: 1000px;
+  will-change: transform, opacity, filter;
 }
 
 .on-reveal.visible {
   opacity: 1;
-  transform: translateY(0) rotateX(0) scale(1);
+  transform: translateY(0) rotateX(0) scale(1) translateZ(0);
   filter: blur(0);
 }
 
@@ -259,21 +264,21 @@
 /* Marquee Smoothness (Left to Right) */
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
-    transform: translateX(-33.33%);
+    transform: translate3d(-33.33%, 0, 0);
   }
 }
 
 @keyframes marquee-reverse {
   0% {
-    transform: translateX(-33.33%);
+    transform: translate3d(-33.33%, 0, 0);
   }
 
   100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -387,10 +392,11 @@
 /* Card Hover Premium */
 .card-premium-hover {
   transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateZ(0);
 }
 
 .card-premium-hover:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-8px) scale(1.02) translateZ(0);
   box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.1), 0 18px 36px -18px rgba(0, 0, 0, 0.12);
 }
 
