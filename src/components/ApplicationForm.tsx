@@ -5,6 +5,7 @@ const ApplicationForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
+        city: '',
         comment: ''
     });
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -28,7 +29,7 @@ const ApplicationForm = () => {
                 STAGE_ID: "NEW",
                 UF_CRM_1728031304072: formData.phone,
                 UF_CRM_1728030866213: formData.name,
-                COMMENTS: formData.comment,
+                COMMENTS: `Город: ${formData.city}\nКомментарий: ${formData.comment}`,
                 SOURCE_ID: "WEB"
             }
         };
@@ -44,7 +45,7 @@ const ApplicationForm = () => {
 
             if (response.ok) {
                 setStatus('success');
-                setFormData({ name: '', phone: '', comment: '' });
+                setFormData({ name: '', phone: '', city: '', comment: '' });
             } else {
                 console.error("Bitrix error", await response.text());
                 setStatus('error');
@@ -174,6 +175,19 @@ const ApplicationForm = () => {
                             </div>
 
                             <div className="space-y-2 md:col-span-2 group on-reveal stagger-3">
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Город</label>
+                                <input
+                                    name="city"
+                                    value={formData.city}
+                                    onChange={handleChange}
+                                    type="text"
+                                    placeholder="Например: Алматы"
+                                    required
+                                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl px-6 py-5 placeholder:text-white/20 focus:outline-none focus:border-brand-green/50 focus:bg-white/[0.08] transition-all hover:bg-white/[0.05] text-white"
+                                />
+                            </div>
+
+                            <div className="space-y-2 md:col-span-2 group on-reveal stagger-4">
                                 <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Комментарий</label>
                                 <textarea
                                     name="comment"
@@ -185,7 +199,7 @@ const ApplicationForm = () => {
                                 />
                             </div>
 
-                            <div className="md:col-span-2 mt-6 on-reveal stagger-4">
+                            <div className="md:col-span-2 mt-6 on-reveal">
                                 <button
                                     type="submit"
                                     disabled={status === 'submitting'}
