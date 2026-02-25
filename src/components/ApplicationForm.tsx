@@ -27,6 +27,7 @@ const ApplicationForm = () => {
                 TITLE: `Заявка с сайта от ${formData.name}`,
                 CATEGORY_ID: 0,
                 STAGE_ID: "NEW",
+                ASSIGNED_BY_ID: 1095,
                 UF_CRM_1728031304072: formData.phone,
                 UF_CRM_1728030866213: formData.name,
                 COMMENTS: `Город: ${formData.city}\nКомментарий: ${formData.comment}`,
