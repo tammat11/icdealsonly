@@ -1,7 +1,45 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+declare global {
+    interface Window {
+        dataLayer: any[];
+        gtag: (...args: any[]) => void;
+        fbq: (...args: any[]) => void;
+    }
+}
 
 const ThankYou = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            // Google Tag Manager
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'page_view',
+                pageUrl: '/thank-you'
+            });
+
+            // Google Analytics (gtag.js)
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'page_view', {
+                    page_path: '/thank-you',
+                    page_title: 'Спасибо за заявку - IC Group'
+                });
+                window.gtag('event', 'generate_lead', {
+                    currency: 'KZT',
+                    value: 1
+                });
+            }
+
+            // Facebook Pixel
+            if (typeof window.fbq === 'function') {
+                window.fbq('track', 'PageView');
+                window.fbq('track', 'Lead');
+            }
+        }
+    }, []);
 
     return (
         <div className="min-h-screen bg-brand-light flex items-center justify-center p-6 relative overflow-hidden">
