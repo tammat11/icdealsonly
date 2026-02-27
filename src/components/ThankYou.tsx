@@ -18,13 +18,13 @@ const ThankYou = () => {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 event: 'page_view',
-                pageUrl: '/thank-you'
+                pageUrl: 'https://deals.ic-group.kz/thank-you'
             });
 
             // Google Analytics (gtag.js)
             if (typeof window.gtag === 'function') {
                 window.gtag('event', 'page_view', {
-                    page_path: '/thank-you',
+                    page_path: 'https://deals.ic-group.kz/thank-you',
                     page_title: 'Спасибо за заявку - IC Group'
                 });
                 window.gtag('event', 'generate_lead', {
