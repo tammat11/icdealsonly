@@ -42,7 +42,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 </div>
 
                 {/* Ultra-tight Minimalist Heading */}
-                <h1 className="flex flex-col items-center mb-6 select-none font-normal tracking-tighter uppercase whitespace-nowrap leading-[0.8] relative z-20">
+                <h1 className="flex flex-col items-center mb-6 select-none font-semibold tracking-tighter uppercase whitespace-nowrap leading-[0.8] relative z-20">
                     <span className="on-reveal stagger-1 block text-[clamp(56px,14vw,120px)] text-brand-dark">
                         Создать
                     </span>

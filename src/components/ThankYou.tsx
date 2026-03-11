@@ -56,7 +56,7 @@ const ThankYou = () => {
                     </svg>
                 </div>
 
-                <h1 className="text-3xl font-normal uppercase text-brand-dark mb-4 tracking-tight">СПАСИБО!</h1>
+                <h1 className="text-3xl font-semibold uppercase text-brand-dark mb-4 tracking-tight">СПАСИБО!</h1>
                 <p className="text-brand-dark/60 mb-10 text-lg leading-relaxed">
                     Ваша заявка успешно принята. <br />
                     Наш менеджер свяжется с вами в ближайшее время.
