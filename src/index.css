@@ -114,12 +114,12 @@
   }
 
   h1 {
-    @apply font-bold uppercase leading-[0.8] tracking-tighter text-brand-dark;
+    @apply font-normal uppercase leading-[0.8] tracking-tighter text-brand-dark;
     font-size: clamp(48px, 10vw, 110px);
   }
 
   h2 {
-    @apply font-extrabold uppercase leading-[0.9] tracking-tighter text-brand-dark;
+    @apply font-normal uppercase leading-[0.9] tracking-tighter text-brand-dark;
     font-size: clamp(36px, 6vw, 56px);
   }
 
