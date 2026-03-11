@@ -83,7 +83,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 </h1>
 
                 <div className="max-w-2xl mb-8 on-reveal stagger-4 text-center">
-                    <p className="text-base md:text-xl font-semibold text-brand-dark/50 tracking-tight leading-tight">
+                    <p className="text-base md:text-xl font-medium text-brand-dark/50 tracking-tight leading-tight">
                         Лидер профессионального клининга в Казахстане. <br />
                     </p>
                 </div>
@@ -94,7 +94,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                         className="btn-gloss group relative px-8 py-4 md:px-12 md:py-6 overflow-hidden rounded-full transition-all duration-500 hover:scale-110 active:scale-95 shadow-xl shadow-brand-dark/10"
                     >
                         <div className="absolute inset-0 bg-brand-dark group-hover:bg-brand-green transition-colors duration-700" />
-                        <span className="relative z-10 text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">Оставить заявку</span>
+                        <span className="relative z-10 text-white text-[10px] md:text-xs font-medium uppercase tracking-[0.3em]">Оставить заявку</span>
                     </button>
                 </div>
             </div>

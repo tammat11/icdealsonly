@@ -35,7 +35,7 @@ const ServicesSection = () => {
                     <h2 className="mb-2">
                         НАШИ УСЛУГИ
                     </h2>
-                    <p className="text-[10px] md:text-xs font-bold text-brand-green uppercase tracking-[0.3em]">
+                    <p className="text-[10px] md:text-xs font-medium text-brand-green uppercase tracking-[0.3em]">
                         Создаем чистоту по всему казахстану
                     </p>
                 </div>
@@ -57,7 +57,7 @@ const ServicesSection = () => {
 
                             <div className="absolute bottom-4 left-3 right-3 md:bottom-6 md:left-5 md:right-5">
                                 <div className="flex flex-col justify-end h-[180px]">
-                                    <h3 className="text-sm md:text-xl font-bold text-white uppercase leading-[1.1] drop-shadow-lg mb-2 h-[2.4em] flex items-start">
+                                    <h3 className="text-sm md:text-xl font-medium text-white uppercase leading-[1.1] drop-shadow-lg mb-2 h-[2.4em] flex items-start">
                                         {service.title}
                                     </h3>
 
@@ -66,7 +66,7 @@ const ServicesSection = () => {
                                     </p>
 
                                     <div className="flex justify-end items-end">
-                                        <span className="text-brand-green text-xl md:text-2xl font-black opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
+                                        <span className="text-brand-green text-xl md:text-2xl font-bold opacity-40 group-hover:opacity-100 transition-opacity duration-500 leading-none">{service.id}</span>
                                     </div>
                                 </div>
                             </div>
@@ -77,9 +77,9 @@ const ServicesSection = () => {
 
             <div className="relative border-t border-black/5 pt-10 on-reveal">
                 <div className="mb-6 px-6 max-w-7xl mx-auto flex justify-between items-end">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
+                    <p className="text-[9px] font-medium uppercase tracking-[0.4em] text-brand-dark/30">Дополнительный сервис</p>
                     <div className="hidden md:flex gap-2">
-                        <div className="text-[9px] font-bold uppercase tracking-widest text-brand-dark/30">Листайте зажав мышкой &rarr;</div>
+                        <div className="text-[9px] font-medium uppercase tracking-widest text-brand-dark/30">Листайте зажав мышкой &rarr;</div>
                     </div>
                 </div>
 
@@ -103,13 +103,13 @@ const ServicesSection = () => {
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
                                         <div className="absolute top-6 left-5 right-5">
-                                            <h4 className="text-lg md:text-xl font-bold text-white uppercase leading-tight drop-shadow-sm">
+                                            <h4 className="text-lg md:text-xl font-medium text-white uppercase leading-tight drop-shadow-sm">
                                                 {service.title}
                                             </h4>
                                         </div>
 
                                         <div className="absolute bottom-6 left-5 right-5 flex justify-end items-center">
-                                            <span className="text-[10px] font-bold text-white/40">{service.id}</span>
+                                            <span className="text-[10px] font-medium text-white/40">{service.id}</span>
                                         </div>
                                     </div>
                                 ))}

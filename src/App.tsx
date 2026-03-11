@@ -69,7 +69,7 @@ function App() {
       </Routes>
 
       <footer className="py-8 text-center bg-white border-t border-black/5 relative z-10">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-brand-dark/30">
+        <p className="text-[10px] font-medium uppercase tracking-widest text-brand-dark/30">
           © {new Date().getFullYear()} IC GROUP. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
         </p>
       </footer>

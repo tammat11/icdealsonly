@@ -56,7 +56,7 @@ const ThankYou = () => {
                     </svg>
                 </div>
 
-                <h1 className="text-3xl font-black uppercase text-brand-dark mb-4 tracking-tight">СПАСИБО!</h1>
+                <h1 className="text-3xl font-bold uppercase text-brand-dark mb-4 tracking-tight">СПАСИБО!</h1>
                 <p className="text-brand-dark/60 mb-10 text-lg leading-relaxed">
                     Ваша заявка успешно принята. <br />
                     Наш менеджер свяжется с вами в ближайшее время.
@@ -64,7 +64,7 @@ const ThankYou = () => {
 
                 <button
                     onClick={() => navigate('/')}
-                    className="w-full py-4 bg-brand-dark text-white rounded-2xl font-bold uppercase tracking-widest hover:bg-brand-green transition-colors duration-300 shadow-lg"
+                    className="w-full py-4 bg-brand-dark text-white rounded-2xl font-medium uppercase tracking-widest hover:bg-brand-green transition-colors duration-300 shadow-lg"
                 >
                     Вернуться на главную
                 </button>

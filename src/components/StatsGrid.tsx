@@ -88,12 +88,12 @@ const StatsGrid = () => {
                                         {stat.icon}
                                     </div>
                                     <div className="flex items-baseline justify-center gap-1">
-                                        <span className="font-bold tracking-tighter leading-none text-3xl md:text-4xl text-brand-green tabular-nums">
+                                        <span className="font-medium tracking-tighter leading-none text-3xl md:text-4xl text-brand-green tabular-nums">
                                             <CountUp end={stat.value} />
                                         </span>
-                                        <span className="font-bold leading-none text-xl md:text-2xl text-brand-green">{stat.suffix}</span>
+                                        <span className="font-medium leading-none text-xl md:text-2xl text-brand-green">{stat.suffix}</span>
                                     </div>
-                                    <div className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">
+                                    <div className="text-[9px] md:text-[10px] font-medium uppercase tracking-widest text-brand-dark/70 leading-relaxed whitespace-pre-line">
                                         {stat.label}
                                     </div>
                                 </div>

@@ -59,11 +59,11 @@
   }
 
   .btn-premium {
-    @apply relative px-10 py-4 rounded-full font-semibold text-sm tracking-widest uppercase transition-all duration-500 bg-brand-dark text-white hover:bg-brand-green hover:scale-105 active:scale-95 shadow-button;
+    @apply relative px-10 py-4 rounded-full font-medium text-sm tracking-widest uppercase transition-all duration-500 bg-brand-dark text-white hover:bg-brand-green hover:scale-105 active:scale-95 shadow-button;
   }
 
   .btn-secondary {
-    @apply px-10 py-4 rounded-full font-semibold text-sm tracking-widest uppercase transition-all duration-500 border border-brand-dark/10 hover:bg-brand-dark hover:text-white active:scale-95;
+    @apply px-10 py-4 rounded-full font-medium text-sm tracking-widest uppercase transition-all duration-500 border border-brand-dark/10 hover:bg-brand-dark hover:text-white active:scale-95;
   }
 
   .glass-card {
@@ -114,7 +114,7 @@
   }
 
   h1 {
-    @apply font-black uppercase leading-[0.8] tracking-tighter text-brand-dark;
+    @apply font-bold uppercase leading-[0.8] tracking-tighter text-brand-dark;
     font-size: clamp(48px, 10vw, 110px);
   }
 
@@ -124,12 +124,12 @@
   }
 
   h3 {
-    @apply font-bold uppercase leading-tight tracking-tight text-brand-dark;
+    @apply font-medium uppercase leading-tight tracking-tight text-brand-dark;
     font-size: clamp(18px, 3vw, 24px);
   }
 
   .section-tag {
-    @apply inline-flex items-center gap-2 px-3 py-1 bg-brand-green/10 border border-brand-green/20 rounded-full mb-4 text-[9px] font-semibold uppercase tracking-[0.4em] text-brand-green;
+    @apply inline-flex items-center gap-2 px-3 py-1 bg-brand-green/10 border border-brand-green/20 rounded-full mb-4 text-[9px] font-medium uppercase tracking-[0.4em] text-brand-green;
   }
 }
 

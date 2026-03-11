@@ -96,7 +96,7 @@ const ApplicationForm = () => {
                 <h2 className="mb-2">
                     ОСТАВИТЬ ЗАЯВКУ
                 </h2>
-                <p className="text-[10px] md:text-xs font-bold text-brand-green uppercase tracking-[0.3em]">
+                <p className="text-[10px] md:text-xs font-medium text-brand-green uppercase tracking-[0.3em]">
                     Оперативно ответим на все ваши вопросы
                 </p>
             </div>
@@ -109,7 +109,7 @@ const ApplicationForm = () => {
 
                     <div className="relative z-10 text-center md:text-left">
                         <div className="mb-12">
-                            <h2 className="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-tighter leading-none text-white drop-shadow-md">
+                            <h2 className="text-3xl md:text-5xl font-medium mb-4 uppercase tracking-tighter leading-none text-white drop-shadow-md">
                                 Начать сотрудничество
                             </h2>
                             <p className="text-white/60 text-base md:text-lg max-w-xl font-light leading-relaxed">
@@ -119,7 +119,7 @@ const ApplicationForm = () => {
 
                         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2 group on-reveal stagger-1">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Ваше имя</label>
+                                <label className="text-[10px] font-medium uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Ваше имя</label>
                                 <input
                                     name="name"
                                     value={formData.name}
@@ -131,7 +131,7 @@ const ApplicationForm = () => {
                                 />
                             </div>
                             <div className="space-y-2 group on-reveal stagger-2">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Телефон</label>
+                                <label className="text-[10px] font-medium uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Телефон</label>
                                 <input
                                     name="phone"
                                     value={formData.phone}
@@ -144,7 +144,7 @@ const ApplicationForm = () => {
                             </div>
 
                             <div className="space-y-2 md:col-span-2 group on-reveal stagger-3">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Город</label>
+                                <label className="text-[10px] font-medium uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Город</label>
                                 <input
                                     name="city"
                                     value={formData.city}
@@ -157,7 +157,7 @@ const ApplicationForm = () => {
                             </div>
 
                             <div className="space-y-2 md:col-span-2 group on-reveal stagger-4">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Комментарий</label>
+                                <label className="text-[10px] font-medium uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Комментарий</label>
                                 <textarea
                                     name="comment"
                                     value={formData.comment}
@@ -175,7 +175,7 @@ const ApplicationForm = () => {
                                     className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-brand-green to-[#8ab32b] py-6 transition-all duration-300 hover:shadow-[0_0_40px_-10px_rgba(162,192,55,0.5)] hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
                                 >
                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-                                    <span className="relative z-10 text-white font-bold uppercase tracking-[0.2em] text-lg shadow-black/20 drop-shadow-sm">
+                                    <span className="relative z-10 text-white font-medium uppercase tracking-[0.2em] text-lg shadow-black/20 drop-shadow-sm">
                                         {status === 'submitting' ? 'Отправка...' : 'Отправить заявку'}
                                     </span>
                                 </button>
