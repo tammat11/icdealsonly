@@ -43,10 +43,10 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
                 {/* Ultra-tight Minimalist Heading */}
                 <h1 className="flex flex-col items-center mb-6 select-none font-semibold tracking-tighter uppercase whitespace-nowrap leading-[0.8] relative z-20">
-                    <span className="on-reveal stagger-1 block text-[clamp(42px,10vw,96px)] text-brand-dark">
+                    <span className="on-reveal stagger-1 block text-[clamp(48px,11vw,104px)] text-brand-dark">
                         Создать
                     </span>
-                    <span className="on-reveal stagger-2 block text-[clamp(50px,12vw,110px)] text-brand-green relative inline-block px-4 py-1 overflow-visible group">
+                    <span className="on-reveal stagger-2 block text-[clamp(56px,13vw,118px)] text-brand-green relative inline-block px-4 py-1 overflow-visible group">
 
                         <span className="relative z-20">
                             Чистоту
@@ -77,7 +77,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                             />
                         </div>
                     </span>
-                    <span className="on-reveal stagger-3 block text-[clamp(42px,10vw,96px)] text-brand-dark">
+                    <span className="on-reveal stagger-3 block text-[clamp(48px,11vw,104px)] text-brand-dark">
                         Во всем
                     </span>
                 </h1>
@@ -85,8 +85,6 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                 <div className="max-w-2xl mb-8 on-reveal stagger-4 text-center">
                     <p className="text-base md:text-xl font-medium text-brand-dark/50 tracking-tight leading-tight">
                         Лидер профессионального клининга в Казахстане.
-                        <br />
-                        Мы работаем только с корпоративным сегментом.
                     </p>
                 </div>
 
