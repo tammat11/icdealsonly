@@ -22,10 +22,10 @@ const ServicesSection = () => {
         { id: "06", title: "Высотные работы", icon: <Building2 className="w-5 h-5" />, image: "/high-altitude.png" },
         { id: "07", title: "Флористы", icon: <Flower2 className="w-5 h-5" />, image: "/florist.png" },
         { id: "08", title: "Дезинсекция", icon: <Bug className="w-5 h-5" />, image: "/pest-control.png" },
-        { id: "09", title: "Инженерия", icon: <Wrench className="w-5 h-5" />, image: "/engineering.png" },
+        { id: "09", title: "Инженерия", icon: <Wrench className="w-5 h-5" />, image: "/service-chemistry.png" },
         { id: "10", title: "Уборка снега", icon: <Snowflake className="w-5 h-5" />, image: "/snow-removal.png" },
         { id: "11", title: "Кофеледи", icon: <Coffee className="w-5 h-5" />, image: "/coffee-lady.png" },
-        { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "/dry-cleaning.png" },
+        { id: "12", title: "Химчистка", icon: <Shirt className="w-5 h-5" />, image: "/service-engineering.png" },
     ];
 
     return (

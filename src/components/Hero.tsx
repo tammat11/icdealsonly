@@ -84,7 +84,9 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
 
                 <div className="max-w-2xl mb-8 on-reveal stagger-4 text-center">
                     <p className="text-base md:text-xl font-medium text-brand-dark/50 tracking-tight leading-tight">
-                        Лидер профессионального клининга в Казахстане. <br />
+                        Лидер профессионального клининга в Казахстане.
+                        <br />
+                        Мы работаем только с корпоративным сегментом.
                     </p>
                 </div>
 

@@ -7,7 +7,7 @@ const ApplicationForm = () => {
         name: '',
         phone: '',
         city: '',
-        comment: ''
+        niche: ''
     });
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
     const navigate = useNavigate();
@@ -32,7 +32,7 @@ const ApplicationForm = () => {
                 ASSIGNED_BY_ID: 1095,
                 UF_CRM_1728031304072: formData.phone,
                 UF_CRM_1728030866213: formData.name,
-                COMMENTS: `Город: ${formData.city}\nКомментарий: ${formData.comment}`,
+                COMMENTS: `Город: ${formData.city}\nНиша: ${formData.niche}`,
                 SOURCE_ID: "WEB"
             }
         };
@@ -48,7 +48,7 @@ const ApplicationForm = () => {
 
             if (response.ok) {
                 setStatus('success');
-                setFormData({ name: '', phone: '', city: '', comment: '' });
+                setFormData({ name: '', phone: '', city: '', niche: '' });
                 navigate('/thank-you');
             } else {
                 console.error("Bitrix error", await response.text());
@@ -98,6 +98,9 @@ const ApplicationForm = () => {
                 </h2>
                 <p className="text-[10px] md:text-xs font-medium text-brand-green uppercase tracking-[0.3em]">
                     Оперативно ответим на все ваши вопросы
+                </p>
+                <p className="mt-2 text-[10px] md:text-xs font-medium text-brand-dark/60 tracking-tight uppercase">
+                    Мы работаем только с корпоративным сегментом
                 </p>
             </div>
 
@@ -157,14 +160,14 @@ const ApplicationForm = () => {
                             </div>
 
                             <div className="space-y-2 md:col-span-2 group on-reveal stagger-4">
-                                <label className="text-[10px] font-medium uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Комментарий</label>
-                                <textarea
-                                    name="comment"
-                                    value={formData.comment}
+                                <label className="text-[10px] font-medium uppercase tracking-widest text-white/40 ml-4 group-focus-within:text-brand-green transition-colors">Ниша</label>
+                                <input
+                                    name="niche"
+                                    value={formData.niche}
                                     onChange={handleChange}
-                                    placeholder="Расскажите о ваших задачах..."
-                                    rows={4}
-                                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl px-6 py-5 placeholder:text-white/20 focus:outline-none focus:border-brand-green/50 focus:bg-white/[0.08] transition-all hover:bg-white/[0.05] resize-none text-white"
+                                    type="text"
+                                    placeholder="Например: бизнес-центр, офисы, склады"
+                                    className="w-full bg-white/[0.03] border border-white/[0.08] rounded-2xl px-6 py-5 placeholder:text-white/20 focus:outline-none focus:border-brand-green/50 focus:bg-white/[0.08] transition-all hover:bg-white/[0.05] text-white"
                                 />
                             </div>
 
