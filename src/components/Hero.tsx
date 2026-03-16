@@ -82,13 +82,13 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     </span>
                 </h1>
 
-                <div className="max-w-2xl mb-8 on-reveal stagger-4 text-center">
+                <div className="max-w-2xl mb-6 on-reveal stagger-4 text-center">
                     <p className="text-base md:text-xl font-medium text-brand-dark/50 tracking-tight leading-tight">
                         Лидер профессионального клининга в Казахстане.
                     </p>
                 </div>
 
-                <div className="flex flex-col items-center gap-3 on-reveal stagger-5">
+                <div className="flex flex-col items-center gap-4 on-reveal stagger-5">
                     <button
                         onClick={onCalcOpen}
                         className="btn-gloss group relative px-8 py-4 md:px-12 md:py-6 overflow-hidden rounded-full transition-all duration-500 hover:scale-110 active:scale-95 shadow-xl shadow-brand-dark/10"
