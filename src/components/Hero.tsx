@@ -82,7 +82,7 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     </span>
                 </h1>
 
-                <div className="max-w-2xl mb-6 on-reveal stagger-4 text-center">
+                <div className="max-w-2xl mb-4 on-reveal stagger-4 text-center">
                     <p className="text-base md:text-xl font-medium text-brand-dark/50 tracking-tight leading-tight">
                         Лидер профессионального клининга в Казахстане.
                     </p>
