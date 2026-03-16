@@ -88,7 +88,10 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                     </p>
                 </div>
 
-                <div className="flex flex-col items-center gap-4 on-reveal stagger-5">
+                <div className="flex flex-col items-center gap-3 on-reveal stagger-5">
+                    <p className="text-[10px] md:text-xs font-medium text-brand-dark/50 tracking-[0.25em] uppercase">
+                        Мы работаем только с корпоративным сегментом
+                    </p>
                     <button
                         onClick={onCalcOpen}
                         className="btn-gloss group relative px-8 py-4 md:px-12 md:py-6 overflow-hidden rounded-full transition-all duration-500 hover:scale-110 active:scale-95 shadow-xl shadow-brand-dark/10"
@@ -96,9 +99,6 @@ const Hero = ({ onCalcOpen }: { onCalcOpen?: () => void }) => {
                         <div className="absolute inset-0 bg-brand-dark group-hover:bg-brand-green transition-colors duration-700" />
                         <span className="relative z-10 text-white text-[10px] md:text-xs font-medium uppercase tracking-[0.3em]">Оставить заявку</span>
                     </button>
-                    <p className="text-[10px] md:text-xs font-medium text-brand-dark/50 tracking-[0.25em] uppercase">
-                        Мы работаем только с корпоративным сегментом
-                    </p>
                 </div>
             </div>
         </section>
