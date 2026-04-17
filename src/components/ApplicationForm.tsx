@@ -27,8 +27,8 @@ const ApplicationForm = () => {
         const payload = {
             fields: {
                 TITLE: `Заявка с сайта от ${formData.name}`,
-                CATEGORY_ID: 0,
-                STAGE_ID: "NEW",
+                CATEGORY_ID: 111,
+                STAGE_ID: "C111:PREPARATION",
                 ASSIGNED_BY_ID: 1095,
                 UF_CRM_1728031304072: formData.phone,
                 UF_CRM_1728030866213: formData.name,
